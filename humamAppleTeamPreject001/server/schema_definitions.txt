@@ -1,0 +1,274 @@
+-- =====================================================
+-- MusicSpace Database Schema Definitions
+-- 최종 업데이트: 마이그레이션 001, 002 적용 후 상태
+-- =====================================================
+
+--- users ---
+CREATE TABLE `users` (
+  `user_id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '사용자 고유 ID',
+  `email` varchar(255) NOT NULL COMMENT '이메일 (로그인 ID)',
+  `password_hash` varchar(255) NOT NULL COMMENT '비밀번호 해시',
+  `nickname` varchar(100) NOT NULL COMMENT '사용자 닉네임',
+  `streaming_services` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL CHECK (json_valid(`streaming_services`)),
+  `user_role` enum('USER','ADMIN') NOT NULL DEFAULT 'USER' COMMENT '사용자 역할',
+  `created_at` datetime DEFAULT current_timestamp() COMMENT '가입일시',
+  `updated_at` datetime DEFAULT current_timestamp() ON UPDATE current_timestamp() COMMENT '수정일시',
+  PRIMARY KEY (`user_id`),
+  UNIQUE KEY `email` (`email`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='사용자 회원가입 및 로그인 정보';
+
+--- playlists ---
+CREATE TABLE `playlists` (
+  `playlist_id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '플레이리스트 고유 ID',
+  `user_id` bigint(20) NOT NULL COMMENT '사용자 ID',
+  `title` varchar(200) NOT NULL COMMENT '플레이리스트 제목',
+  `description` text DEFAULT NULL COMMENT '플레이리스트 설명',
+  `space_type` enum('PMS','EMS','GMS') NOT NULL DEFAULT 'EMS' COMMENT '공간 타입 (PMS, EMS, GMS)',
+  `status_flag` enum('PTP','PRP','PFP') NOT NULL DEFAULT 'PTP' COMMENT '상태 플래그 (PTP:임시, PRP:정규, PFP:필터링됨)',
+  `source_type` enum('Platform','Upload','System') NOT NULL DEFAULT 'Platform' COMMENT '출처 타입',
+  `external_id` varchar(255) DEFAULT NULL COMMENT '외부 플랫폼에서의 플레이리스트 ID',
+  `cover_image` varchar(500) DEFAULT NULL COMMENT '커버 이미지 URL',
+  `ai_score` decimal(5,2) DEFAULT 0.00 COMMENT 'AI 추천 점수 (0-100)',
+  `created_at` datetime DEFAULT current_timestamp() COMMENT '생성일시',
+  `updated_at` datetime DEFAULT current_timestamp() ON UPDATE current_timestamp() COMMENT '수정일시',
+  PRIMARY KEY (`playlist_id`),
+  KEY `user_id` (`user_id`),
+  KEY `idx_playlists_space_type` (`space_type`),
+  KEY `idx_playlists_user_space` (`user_id`, `space_type`),
+  CONSTRAINT `playlists_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='플레이리스트 정보 (PMS, EMS, GMS 통합 관리)';
+
+--- tracks ---
+CREATE TABLE `tracks` (
+  `track_id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '트랙 고유 ID',
+  `title` varchar(255) NOT NULL COMMENT '곡 제목',
+  `artist` varchar(255) NOT NULL COMMENT '아티스트',
+  `album` varchar(255) DEFAULT NULL COMMENT '앨범명',
+  `duration` int(11) DEFAULT NULL COMMENT '재생 시간(초)',
+  `isrc` varchar(50) DEFAULT NULL COMMENT '국제 표준 녹음 코드',
+  `genre` varchar(255) DEFAULT NULL COMMENT '장르 (콤마로 구분)',
+  `audio_features` json DEFAULT NULL COMMENT '오디오 특성 JSON (레거시)',
+  `external_metadata` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL CHECK (json_valid(`external_metadata`)),
+  -- Spotify Track Info (마이그레이션 003)
+  `popularity` tinyint unsigned DEFAULT NULL COMMENT 'Spotify 인기도 (0-100)',
+  `explicit` tinyint(1) DEFAULT 0 COMMENT '성인 컨텐츠 여부',
+  `release_date` date DEFAULT NULL COMMENT '발매일',
+  `track_number` smallint unsigned DEFAULT NULL COMMENT '앨범 내 트랙 번호',
+  -- Last.fm Stats (마이그레이션 003)
+  `playcount` bigint unsigned DEFAULT NULL COMMENT 'Last.fm 총 재생 횟수',
+  `listeners` int unsigned DEFAULT NULL COMMENT 'Last.fm 청취자 수',
+  -- Music IDs (마이그레이션 003)
+  `mbid` varchar(36) DEFAULT NULL COMMENT 'MusicBrainz ID',
+  `spotify_id` varchar(22) DEFAULT NULL COMMENT 'Spotify Track ID',
+  -- Spotify Audio Features 개별 컬럼 (마이그레이션 003)
+  `tempo` decimal(6,3) DEFAULT NULL COMMENT 'BPM',
+  `music_key` tinyint DEFAULT NULL COMMENT '조성 (0-11, -1=Unknown)',
+  `mode` tinyint(1) DEFAULT NULL COMMENT '0=Minor, 1=Major',
+  `time_signature` tinyint DEFAULT NULL COMMENT '박자',
+  `danceability` decimal(4,3) DEFAULT NULL COMMENT '춤추기 좋은 정도 (0-1)',
+  `energy` decimal(4,3) DEFAULT NULL COMMENT '에너지 레벨 (0-1)',
+  `valence` decimal(4,3) DEFAULT NULL COMMENT '긍정적 분위기 (0-1)',
+  `acousticness` decimal(4,3) DEFAULT NULL COMMENT '어쿠스틱 정도 (0-1)',
+  `instrumentalness` decimal(4,3) DEFAULT NULL COMMENT '보컬 없는 정도 (0-1)',
+  `liveness` decimal(4,3) DEFAULT NULL COMMENT '라이브 느낌 (0-1)',
+  `speechiness` decimal(4,3) DEFAULT NULL COMMENT '말하는 정도 (0-1)',
+  `loudness` decimal(5,2) DEFAULT NULL COMMENT '음량 dB (-60~0)',
+  `created_at` datetime DEFAULT current_timestamp() COMMENT '등록일시',
+  PRIMARY KEY (`track_id`),
+  KEY `idx_tracks_artist` (`artist`),
+  KEY `idx_tracks_genre` (`genre`),
+  KEY `idx_tracks_popularity` (`popularity` DESC),
+  KEY `idx_tracks_release_date` (`release_date`),
+  KEY `idx_tracks_spotify_id` (`spotify_id`),
+  KEY `idx_tracks_mbid` (`mbid`),
+  KEY `idx_tracks_tempo` (`tempo`),
+  KEY `idx_tracks_energy` (`energy`),
+  KEY `idx_tracks_valence` (`valence`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='전체 트랙 메타데이터 저장소';
+
+--- artists (마이그레이션 003) ---
+CREATE TABLE `artists` (
+  `artist_id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '아티스트 ID',
+  `name` varchar(255) NOT NULL COMMENT '아티스트명',
+  `spotify_id` varchar(22) DEFAULT NULL COMMENT 'Spotify Artist ID',
+  `mbid` varchar(36) DEFAULT NULL COMMENT 'MusicBrainz ID',
+  `genres` json DEFAULT NULL COMMENT '장르 목록 (JSON 배열)',
+  `popularity` tinyint unsigned DEFAULT NULL COMMENT 'Spotify 인기도',
+  `followers` int unsigned DEFAULT NULL COMMENT 'Spotify 팔로워 수',
+  `image_url` varchar(500) DEFAULT NULL COMMENT '아티스트 이미지 URL',
+  `created_at` datetime DEFAULT current_timestamp(),
+  `updated_at` datetime DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  PRIMARY KEY (`artist_id`),
+  UNIQUE KEY `uk_spotify_id` (`spotify_id`),
+  KEY `idx_name` (`name`),
+  KEY `idx_mbid` (`mbid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='아티스트 정보 테이블';
+
+--- albums (마이그레이션 003) ---
+CREATE TABLE `albums` (
+  `album_id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '앨범 ID',
+  `name` varchar(255) NOT NULL COMMENT '앨범명',
+  `artist_id` bigint(20) DEFAULT NULL COMMENT '메인 아티스트 ID',
+  `spotify_id` varchar(22) DEFAULT NULL COMMENT 'Spotify Album ID',
+  `mbid` varchar(36) DEFAULT NULL COMMENT 'MusicBrainz ID',
+  `album_type` enum('album','single','compilation','ep') DEFAULT 'album' COMMENT '앨범 타입',
+  `release_date` date DEFAULT NULL COMMENT '발매일',
+  `total_tracks` smallint unsigned DEFAULT NULL COMMENT '총 트랙 수',
+  `image_url` varchar(500) DEFAULT NULL COMMENT '앨범 커버 이미지 URL',
+  `label` varchar(255) DEFAULT NULL COMMENT '레이블/레코드사',
+  `created_at` datetime DEFAULT current_timestamp(),
+  `updated_at` datetime DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  PRIMARY KEY (`album_id`),
+  UNIQUE KEY `uk_spotify_id` (`spotify_id`),
+  KEY `idx_name` (`name`),
+  KEY `idx_artist` (`artist_id`),
+  KEY `idx_release_date` (`release_date`),
+  CONSTRAINT `fk_album_artist` FOREIGN KEY (`artist_id`) REFERENCES `artists` (`artist_id`) ON DELETE SET NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='앨범 정보 테이블';
+
+--- playlist_tracks ---
+CREATE TABLE `playlist_tracks` (
+  `map_id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '매핑 ID',
+  `playlist_id` bigint(20) NOT NULL COMMENT '플레이리스트 ID',
+  `track_id` bigint(20) NOT NULL COMMENT '트랙 ID',
+  `order_index` int(11) NOT NULL DEFAULT 0 COMMENT '플레이리스트 내 정렬 순서',
+  `added_at` datetime DEFAULT current_timestamp() COMMENT '추가된 일시',
+  PRIMARY KEY (`map_id`),
+  KEY `track_id` (`track_id`),
+  KEY `idx_playlist_order` (`playlist_id`,`order_index`),
+  CONSTRAINT `playlist_tracks_ibfk_1` FOREIGN KEY (`playlist_id`) REFERENCES `playlists` (`playlist_id`) ON DELETE CASCADE,
+  CONSTRAINT `playlist_tracks_ibfk_2` FOREIGN KEY (`track_id`) REFERENCES `tracks` (`track_id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='플레이리스트와 트랙 간의 관계 정의';
+
+--- genre_categories (마이그레이션 001) ---
+CREATE TABLE `genre_categories` (
+  `category_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '카테고리 ID',
+  `category_code` varchar(50) NOT NULL COMMENT '카테고리 코드',
+  `category_name_ko` varchar(100) NOT NULL COMMENT '카테고리명 (한국어)',
+  `category_name_en` varchar(100) NOT NULL COMMENT '카테고리명 (영어)',
+  `category_icon` varchar(10) DEFAULT NULL COMMENT '카테고리 아이콘',
+  `display_order` int(11) DEFAULT 0 COMMENT '표시 순서',
+  `is_active` tinyint(1) DEFAULT 1 COMMENT '활성화 여부',
+  PRIMARY KEY (`category_id`),
+  UNIQUE KEY `uk_category_code` (`category_code`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='장르 카테고리 테이블';
+
+--- music_genres (마이그레이션 001) ---
+CREATE TABLE `music_genres` (
+  `genre_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '장르 고유 ID',
+  `category_id` int(11) DEFAULT NULL COMMENT '카테고리 ID',
+  `genre_code` varchar(50) NOT NULL COMMENT '장르 코드 (Spotify seed)',
+  `genre_name_ko` varchar(100) NOT NULL COMMENT '장르명 (한국어)',
+  `genre_name_en` varchar(100) NOT NULL COMMENT '장르명 (영어)',
+  `genre_icon` varchar(10) DEFAULT NULL COMMENT '장르 아이콘 (이모지)',
+  `genre_color` varchar(50) DEFAULT NULL COMMENT '장르 대표 색상 (Tailwind gradient)',
+  `display_order` int(11) DEFAULT 0 COMMENT '표시 순서',
+  `is_active` tinyint(1) DEFAULT 1 COMMENT '활성화 여부',
+  `created_at` datetime DEFAULT current_timestamp() COMMENT '생성일시',
+  PRIMARY KEY (`genre_id`),
+  UNIQUE KEY `uk_genre_code` (`genre_code`),
+  KEY `idx_category` (`category_id`),
+  CONSTRAINT `fk_genre_category` FOREIGN KEY (`category_id`) REFERENCES `genre_categories` (`category_id`) ON DELETE SET NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Spotify 기반 음악 장르 마스터 테이블';
+
+--- user_genres (마이그레이션 001) ---
+CREATE TABLE `user_genres` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '매핑 ID',
+  `user_id` bigint(20) NOT NULL COMMENT '사용자 ID',
+  `genre_id` int(11) NOT NULL COMMENT '장르 ID',
+  `preference_level` tinyint(4) DEFAULT 1 COMMENT '선호도 레벨 (1: 기본, 2: 좋아함, 3: 매우좋아함)',
+  `created_at` datetime DEFAULT current_timestamp() COMMENT '등록일시',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `uk_user_genre` (`user_id`, `genre_id`),
+  KEY `idx_user_id` (`user_id`),
+  KEY `idx_genre_id` (`genre_id`),
+  CONSTRAINT `fk_user_genres_user` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE,
+  CONSTRAINT `fk_user_genres_genre` FOREIGN KEY (`genre_id`) REFERENCES `music_genres` (`genre_id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='사용자별 선호 장르 매핑';
+
+--- user_track_ratings (마이그레이션 002) ---
+CREATE TABLE `user_track_ratings` (
+  `rating_id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '평가 ID',
+  `user_id` bigint(20) NOT NULL COMMENT '사용자 ID',
+  `track_id` bigint(20) NOT NULL COMMENT '트랙 ID',
+  `rating` tinyint(4) NOT NULL COMMENT '평점 (1: 좋아요, -1: 싫어요, 0: 중립)',
+  `created_at` datetime DEFAULT current_timestamp() COMMENT '평가일시',
+  `updated_at` datetime DEFAULT current_timestamp() ON UPDATE current_timestamp() COMMENT '수정일시',
+  PRIMARY KEY (`rating_id`),
+  UNIQUE KEY `uk_user_track` (`user_id`, `track_id`),
+  KEY `idx_user_id` (`user_id`),
+  KEY `idx_track_id` (`track_id`),
+  KEY `idx_rating` (`rating`),
+  CONSTRAINT `fk_rating_user` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE,
+  CONSTRAINT `fk_rating_track` FOREIGN KEY (`track_id`) REFERENCES `tracks` (`track_id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='사용자 트랙 평가 (좋아요/싫어요)';
+
+--- track_scored_id (마이그레이션 002) ---
+CREATE TABLE `track_scored_id` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'ID',
+  `track_id` bigint(20) NOT NULL COMMENT '트랙 ID',
+  `user_id` bigint(20) NOT NULL COMMENT '사용자 ID (개인화 점수)',
+  `ai_score` decimal(5,2) DEFAULT 0.00 COMMENT 'AI 추천 점수 (0-100)',
+  `score_type` varchar(50) DEFAULT 'general' COMMENT '점수 타입 (general, personalized, trending)',
+  `calculated_at` datetime DEFAULT current_timestamp() COMMENT '계산일시',
+  `updated_at` datetime DEFAULT current_timestamp() ON UPDATE current_timestamp() COMMENT '수정일시',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `uk_track_user` (`track_id`, `user_id`),
+  KEY `idx_user_id` (`user_id`),
+  KEY `idx_ai_score` (`ai_score` DESC),
+  CONSTRAINT `fk_track_score_track` FOREIGN KEY (`track_id`) REFERENCES `tracks` (`track_id`) ON DELETE CASCADE,
+  CONSTRAINT `fk_track_score_user` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='트랙 AI 추천 점수';
+
+--- playlist_scored_id (마이그레이션 002) ---
+CREATE TABLE `playlist_scored_id` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'ID',
+  `playlist_id` bigint(20) NOT NULL COMMENT '플레이리스트 ID',
+  `user_id` bigint(20) NOT NULL COMMENT '사용자 ID',
+  `ai_score` decimal(5,2) DEFAULT 0.00 COMMENT 'AI 추천 점수 (0-100)',
+  `score_type` varchar(50) DEFAULT 'general' COMMENT '점수 타입',
+  `calculated_at` datetime DEFAULT current_timestamp() COMMENT '계산일시',
+  `updated_at` datetime DEFAULT current_timestamp() ON UPDATE current_timestamp() COMMENT '수정일시',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `uk_playlist_user` (`playlist_id`, `user_id`),
+  KEY `idx_user_id` (`user_id`),
+  KEY `idx_ai_score` (`ai_score` DESC),
+  CONSTRAINT `fk_playlist_score_playlist` FOREIGN KEY (`playlist_id`) REFERENCES `playlists` (`playlist_id`) ON DELETE CASCADE,
+  CONSTRAINT `fk_playlist_score_user` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='플레이리스트 AI 추천 점수';
+
+--- track_tags (마이그레이션 002) ---
+CREATE TABLE `track_tags` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'ID',
+  `track_id` bigint(20) NOT NULL COMMENT '트랙 ID',
+  `tag` varchar(100) NOT NULL COMMENT '태그명',
+  `source` varchar(50) DEFAULT 'lastfm' COMMENT '태그 출처 (lastfm, spotify, user)',
+  `weight` int(11) DEFAULT 100 COMMENT '태그 가중치 (0-100)',
+  `created_at` datetime DEFAULT current_timestamp() COMMENT '생성일시',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `uk_track_tag_source` (`track_id`, `tag`, `source`),
+  KEY `idx_track_id` (`track_id`),
+  KEY `idx_tag` (`tag`),
+  CONSTRAINT `fk_tag_track` FOREIGN KEY (`track_id`) REFERENCES `tracks` (`track_id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='트랙 태그 정보';
+
+-- =====================================================
+-- 테이블 관계도 (ERD)
+-- =====================================================
+-- 
+-- users (1) ─────────────────┬──────────────────────────────────────┐
+--   │                        │                                      │
+--   │ (1:N)                  │ (1:N)                                │ (1:N)
+--   ▼                        ▼                                      ▼
+-- playlists (N)          user_genres (N)                    user_track_ratings (N)
+--   │                        │                                      │
+--   │ (1:N)                  │ (N:1)                                │ (N:1)
+--   ▼                        ▼                                      ▼
+-- playlist_tracks (N)    music_genres (1)                     tracks (1)
+--   │                        │                                      │
+--   │ (N:1)                  │ (N:1)                                │ (1:N)
+--   ▼                        ▼                                      ▼
+-- tracks (1)             genre_categories (1)                 track_tags (N)
+--
+-- =====================================================
+

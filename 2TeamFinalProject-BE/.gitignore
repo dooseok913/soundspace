@@ -1,0 +1,47 @@
+### Java & Gradle ###
+*.class
+*.jar
+*.war
+*.ear
+*.ctxt
+.gradle/
+build/
+bin/
+out/
+.gradletasknamecache
+
+### IntelliJ IDEA ###
+.idea/
+*.iws
+*.iml
+*.ipr
+.shelf/
+
+### Docker & Database Data (핵심!) ###
+# 도커 볼륨 데이터 폴더
+mariadb_data/
+mysql_data/
+db_data/
+redis_data/
+# Redis 바이너리 덤프
+*.rdb
+*.aof
+dump.rdb
+
+### OS & Temp Files ###
+.DS_Store
+Thumbs.db
+*.swp
+*.bak
+*.tmp
+*~
+
+### Application Logs ###
+*.log
+logs/
+
+### Environment & Secrets ###
+# 중요 설정 및 환경 변수 파일
+# .env
+# src/main/resources/env.properties
+src/main/resources/application.properties

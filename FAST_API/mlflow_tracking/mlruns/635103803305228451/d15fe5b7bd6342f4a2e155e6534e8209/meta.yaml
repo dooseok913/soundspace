@@ -1,0 +1,14 @@
+artifact_uri: file:///D:\lecture\colab\final\integrated\FAST_API\mlflow_tracking/mlruns/635103803305228451/d15fe5b7bd6342f4a2e155e6534e8209/artifacts
+end_time: 1771313434751
+entry_point_name: ''
+experiment_id: '635103803305228451'
+lifecycle_stage: active
+run_id: d15fe5b7bd6342f4a2e155e6534e8209
+run_name: M3_pms200
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1771313430085
+status: 3
+tags: []
+user_id: human-06

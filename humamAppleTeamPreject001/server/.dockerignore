@@ -1,0 +1,11 @@
+node_modules
+.git
+*.md
+.env
+*.log
+*.sql
+*.csv
+*.json
+!package*.json
+*.py
+*.txt

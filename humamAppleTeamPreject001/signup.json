@@ -1,0 +1,12 @@
+{
+    "email": "test_crash_debug_2@example.com",
+    "password": "password123",
+    "name": "Debug User 2",
+    "streamingServices": [
+        "spotify",
+        "apple_music"
+    ],
+    "genres": [
+        "pop"
+    ]
+}

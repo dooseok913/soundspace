@@ -1,0 +1,300 @@
+        u1_0.email,
+        u1_0.nickname,
+        u1_0.password_hash,
+        u1_0.user_role,
+        u1_0.streaming_services,
+        u1_0.updated_at 
+    from
+        users u1_0 
+    where
+        u1_0.email=?
+2026-02-04T01:10:44.104Z DEBUG 1 --- [musicspace-backend] [nio-8080-exec-2] o.m.jdbc.client.impl.StandardClient      : execute query: select u1_0.user_id,u1_0.created_at,u1_0.email,u1_0.nickname,u1_0.password_hash,u1_0.user_role,u1_0.streaming_services,u1_0.updated_at from users u1_0 where u1_0.email=?
+2026-02-04T01:10:44.105Z DEBUG 1 --- [musicspace-backend] [nio-8080-exec-2] org.hibernate.orm.results                : Initializer list:
+	  com.springboot.finalprojcet.entity.Users(2) -> EntityJoinedFetchInitializer(com.springboot.finalprojcet.entity.Users(2))@1119812595 (SingleTableEntityPersister(com.springboot.finalprojcet.entity.Users))
+
+2026-02-04T01:10:44.106Z DEBUG 1 --- [musicspace-backend] [nio-8080-exec-2] o.s.security.web.FilterChainProxy        : Secured GET /api/auth/me
+2026-02-04T01:10:44.106Z DEBUG 1 --- [musicspace-backend] [nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : GET "/api/auth/me", parameters={}
+2026-02-04T01:10:44.106Z DEBUG 1 --- [musicspace-backend] [nio-8080-exec-2] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.springboot.finalprojcet.domain.auth.controller.AuthController#getCurrentUser(CustomUserDetails)
+2026-02-04T01:10:44.107Z DEBUG 1 --- [musicspace-backend] [nio-8080-exec-2] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json, application/yaml]
+2026-02-04T01:10:44.107Z DEBUG 1 --- [musicspace-backend] [nio-8080-exec-2] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{user={id=22, email=jowoosung221@gmail.com, name=sdddd}}]
+2026-02-04T01:10:44.108Z DEBUG 1 --- [musicspace-backend] [nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2026-02-04T01:10:44.108Z DEBUG 1 --- [musicspace-backend] [nio-8080-exec-2] o.apache.coyote.http11.Http11Processor   : Error parsing HTTP request header
+
+java.io.EOFException
+	at org.apache.tomcat.util.net.NioEndpoint$NioSocketWrapper.fillReadBuffer(NioEndpoint.java:1333) ~[tomcat-embed-core-10.1.50.jar!/:na]
+	at org.apache.tomcat.util.net.NioEndpoint$NioSocketWrapper.read(NioEndpoint.java:1218) ~[tomcat-embed-core-10.1.50.jar!/:na]
+	at org.apache.coyote.http11.Http11InputBuffer.fill(Http11InputBuffer.java:780) ~[tomcat-embed-core-10.1.50.jar!/:na]
+	at org.apache.coyote.http11.Http11InputBuffer.parseRequestLine(Http11InputBuffer.java:345) ~[tomcat-embed-core-10.1.50.jar!/:na]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:272) ~[tomcat-embed-core-10.1.50.jar!/:na]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63) ~[tomcat-embed-core-10.1.50.jar!/:na]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:903) ~[tomcat-embed-core-10.1.50.jar!/:na]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1774) ~[tomcat-embed-core-10.1.50.jar!/:na]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52) ~[tomcat-embed-core-10.1.50.jar!/:na]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:973) ~[tomcat-embed-core-10.1.50.jar!/:na]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:491) ~[tomcat-embed-core-10.1.50.jar!/:na]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63) ~[tomcat-embed-core-10.1.50.jar!/:na]
+	at java.base/java.lang.Thread.run(Unknown Source) ~[na:na]
+
+2026-02-04T01:10:44.109Z DEBUG 1 --- [musicspace-backend] [nio-8080-exec-2] o.apache.coyote.http11.Http11Processor   : Error state [CLOSE_CONNECTION_NOW] reported while processing request
+
+java.io.EOFException
+	at org.apache.tomcat.util.net.NioEndpoint$NioSocketWrapper.fillReadBuffer(NioEndpoint.java:1333) ~[tomcat-embed-core-10.1.50.jar!/:na]
+	at org.apache.tomcat.util.net.NioEndpoint$NioSocketWrapper.read(NioEndpoint.java:1218) ~[tomcat-embed-core-10.1.50.jar!/:na]
+	at org.apache.coyote.http11.Http11InputBuffer.fill(Http11InputBuffer.java:780) ~[tomcat-embed-core-10.1.50.jar!/:na]
+	at org.apache.coyote.http11.Http11InputBuffer.parseRequestLine(Http11InputBuffer.java:345) ~[tomcat-embed-core-10.1.50.jar!/:na]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:272) ~[tomcat-embed-core-10.1.50.jar!/:na]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63) ~[tomcat-embed-core-10.1.50.jar!/:na]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:903) ~[tomcat-embed-core-10.1.50.jar!/:na]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1774) ~[tomcat-embed-core-10.1.50.jar!/:na]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52) ~[tomcat-embed-core-10.1.50.jar!/:na]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:973) ~[tomcat-embed-core-10.1.50.jar!/:na]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:491) ~[tomcat-embed-core-10.1.50.jar!/:na]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63) ~[tomcat-embed-core-10.1.50.jar!/:na]
+	at java.base/java.lang.Thread.run(Unknown Source) ~[na:na]
+
+2026-02-04T01:10:44.142Z DEBUG 1 --- [musicspace-backend] [nio-8080-exec-7] o.s.security.web.FilterChainProxy        : Securing POST /api/tidal/auth/exchange
+2026-02-04T01:10:44.143Z DEBUG 1 --- [musicspace-backend] [nio-8080-exec-7] tor$SharedEntityManagerInvocationHandler : Creating new EntityManager for shared EntityManager invocation
+2026-02-04T01:10:44.144Z DEBUG 1 --- [musicspace-backend] [nio-8080-exec-7] org.hibernate.orm.sql.ast.create         : Created new SQL alias : u1_0
+2026-02-04T01:10:44.144Z DEBUG 1 --- [musicspace-backend] [nio-8080-exec-7] org.hibernate.orm.sql.ast.create         : Registration of TableGroup [StandardTableGroup(com.springboot.finalprojcet.entity.Users(2))] with identifierForTableGroup [com.springboot.finalprojcet.entity.Users] for NavigablePath [com.springboot.finalprojcet.entity.Users] 
+2026-02-04T01:10:44.144Z DEBUG 1 --- [musicspace-backend] [nio-8080-exec-7] o.h.q.sqm.sql.BaseSqmToSqlAstConverter   : Determining mapping-model type for SqmParameter : org.hibernate.query.sqm.tree.expression.SqmJpaCriteriaParameterWrapper@0
+2026-02-04T01:10:44.144Z DEBUG 1 --- [musicspace-backend] [nio-8080-exec-7] o.h.q.sqm.sql.BaseSqmToSqlAstConverter   : Determining mapping-model type for SqmPath : SqmBasicValuedSimplePath(com.springboot.finalprojcet.entity.Users(2).email) 
+2026-02-04T01:10:44.144Z DEBUG 1 --- [musicspace-backend] [nio-8080-exec-7] org.hibernate.orm.results.graph.AST      : DomainResult Graph:
+ \-EntityResultImpl [com.springboot.finalprojcet.entity.Users(2)]
+ |  +-BasicFetch [com.springboot.finalprojcet.entity.Users(2).createdAt]
+ |  +-BasicFetch [com.springboot.finalprojcet.entity.Users(2).email]
+ |  +-BasicFetch [com.springboot.finalprojcet.entity.Users(2).nickname]
+ |  +-BasicFetch [com.springboot.finalprojcet.entity.Users(2).password]
+ |  +-BasicFetch [com.springboot.finalprojcet.entity.Users(2).roleType]
+ |  +-BasicFetch [com.springboot.finalprojcet.entity.Users(2).streamingServices]
+ |  \-BasicFetch [com.springboot.finalprojcet.entity.Users(2).updatedAt]
+
+2026-02-04T01:10:44.144Z DEBUG 1 --- [musicspace-backend] [nio-8080-exec-7] org.hibernate.orm.sql.ast.tree           : SQL AST Tree:
+    SelectStatement {
+      FromClause {
+        StandardTableGroup (u1 : com.springboot.finalprojcet.entity.Users(2)) {
+          primaryTableReference : users as u1_0
+        }
+      }
+    }
+
+2026-02-04T01:10:44.145Z DEBUG 1 --- [musicspace-backend] [nio-8080-exec-7] org.hibernate.orm.sql.exec               : Skipping reading Query result cache data: cache-enabled = false, cache-mode = NORMAL
+2026-02-04T01:10:44.145Z DEBUG 1 --- [musicspace-backend] [nio-8080-exec-7] org.hibernate.SQL                        : 
+    select
+        u1_0.user_id,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.nickname,
+        u1_0.password_hash,
+        u1_0.user_role,
+        u1_0.streaming_services,
+        u1_0.updated_at 
+    from
+        users u1_0 
+    where
+        u1_0.email=?
+Hibernate: 
+    select
+        u1_0.user_id,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.nickname,
+        u1_0.password_hash,
+        u1_0.user_role,
+        u1_0.streaming_services,
+        u1_0.updated_at 
+    from
+        users u1_0 
+    where
+        u1_0.email=?
+2026-02-04T01:10:44.145Z DEBUG 1 --- [musicspace-backend] [nio-8080-exec-7] o.m.jdbc.client.impl.StandardClient      : execute query: select u1_0.user_id,u1_0.created_at,u1_0.email,u1_0.nickname,u1_0.password_hash,u1_0.user_role,u1_0.streaming_services,u1_0.updated_at from users u1_0 where u1_0.email=?
+2026-02-04T01:10:44.146Z DEBUG 1 --- [musicspace-backend] [nio-8080-exec-7] org.hibernate.orm.results                : Initializer list:
+	  com.springboot.finalprojcet.entity.Users(2) -> EntityJoinedFetchInitializer(com.springboot.finalprojcet.entity.Users(2))@1129666218 (SingleTableEntityPersister(com.springboot.finalprojcet.entity.Users))
+
+2026-02-04T01:10:44.146Z DEBUG 1 --- [musicspace-backend] [nio-8080-exec-7] o.s.security.web.FilterChainProxy        : Secured POST /api/tidal/auth/exchange
+2026-02-04T01:10:44.147Z DEBUG 1 --- [musicspace-backend] [nio-8080-exec-7] o.s.web.servlet.DispatcherServlet        : POST "/api/tidal/auth/exchange", parameters={}
+2026-02-04T01:10:44.147Z DEBUG 1 --- [musicspace-backend] [nio-8080-exec-7] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.springboot.finalprojcet.domain.tidal.controller.TidalController#exchangeCode(TidalExchangeRequest, HttpServletRequest)
+2026-02-04T01:10:44.148Z DEBUG 1 --- [musicspace-backend] [nio-8080-exec-7] m.m.a.RequestResponseBodyMethodProcessor : Read "application/json;charset=UTF-8" to [com.springboot.finalprojcet.domain.tidal.dto.TidalExchangeRequest@e28197e]
+2026-02-04T01:10:44.148Z DEBUG 1 --- [musicspace-backend] [nio-8080-exec-7] o.s.d.redis.core.RedisConnectionUtils    : Fetching Redis Connection from RedisConnectionFactory
+2026-02-04T01:10:44.148Z DEBUG 1 --- [musicspace-backend] [nio-8080-exec-7] io.lettuce.core.RedisChannelHandler      : dispatching command AsyncCommand [type=GET, output=ValueOutput [output=null, error='null'], commandType=io.lettuce.core.protocol.Command]
+2026-02-04T01:10:44.148Z DEBUG 1 --- [musicspace-backend] [nio-8080-exec-7] i.lettuce.core.protocol.DefaultEndpoint  : [channel=0x3c3d531f, /172.18.0.3:32972 -> redis/172.18.0.2:6379, epid=0x2] write() writeAndFlush command AsyncCommand [type=GET, output=ValueOutput [output=null, error='null'], commandType=io.lettuce.core.protocol.Command]
+2026-02-04T01:10:44.148Z DEBUG 1 --- [musicspace-backend] [nio-8080-exec-7] i.lettuce.core.protocol.DefaultEndpoint  : [channel=0x3c3d531f, /172.18.0.3:32972 -> redis/172.18.0.2:6379, epid=0x2] write() done
+2026-02-04T01:10:44.148Z DEBUG 1 --- [musicspace-backend] [ioEventLoop-4-2] i.lettuce.core.protocol.CommandHandler   : [channel=0x3c3d531f, /172.18.0.3:32972 -> redis/172.18.0.2:6379, epid=0x2, chid=0x2] write(ctx, AsyncCommand [type=GET, output=ValueOutput [output=null, error='null'], commandType=io.lettuce.core.protocol.Command], promise)
+2026-02-04T01:10:44.149Z DEBUG 1 --- [musicspace-backend] [ioEventLoop-4-2] i.lettuce.core.protocol.CommandEncoder   : [channel=0x3c3d531f, /172.18.0.3:32972 -> redis/172.18.0.2:6379] writing command AsyncCommand [type=GET, output=ValueOutput [output=null, error='null'], commandType=io.lettuce.core.protocol.Command]
+2026-02-04T01:10:44.149Z DEBUG 1 --- [musicspace-backend] [ioEventLoop-4-2] i.lettuce.core.protocol.CommandHandler   : [channel=0x3c3d531f, /172.18.0.3:32972 -> redis/172.18.0.2:6379, epid=0x2, chid=0x2] Received: 50 bytes, 1 commands in the stack
+2026-02-04T01:10:44.149Z DEBUG 1 --- [musicspace-backend] [ioEventLoop-4-2] i.lettuce.core.protocol.CommandHandler   : [channel=0x3c3d531f, /172.18.0.3:32972 -> redis/172.18.0.2:6379, epid=0x2, chid=0x2] Stack contains: 1 commands
+2026-02-04T01:10:44.149Z DEBUG 1 --- [musicspace-backend] [ioEventLoop-4-2] i.l.core.protocol.RedisStateMachine      : Decode done, empty stack: true
+2026-02-04T01:10:44.149Z DEBUG 1 --- [musicspace-backend] [ioEventLoop-4-2] i.lettuce.core.protocol.CommandHandler   : [channel=0x3c3d531f, /172.18.0.3:32972 -> redis/172.18.0.2:6379, epid=0x2, chid=0x2] Completing command LatencyMeteredCommand [type=GET, output=ValueOutput [output=[B@1663cd40, error='null'], commandType=io.lettuce.core.protocol.AsyncCommand]
+2026-02-04T01:10:44.149Z DEBUG 1 --- [musicspace-backend] [nio-8080-exec-7] o.s.d.redis.core.RedisConnectionUtils    : Closing Redis Connection
+2026-02-04T01:10:44.149Z DEBUG 1 --- [musicspace-backend] [nio-8080-exec-7] o.s.d.redis.core.RedisConnectionUtils    : Fetching Redis Connection from RedisConnectionFactory
+2026-02-04T01:10:44.150Z DEBUG 1 --- [musicspace-backend] [nio-8080-exec-7] io.lettuce.core.RedisChannelHandler      : dispatching command AsyncCommand [type=DEL, output=IntegerOutput [output=null, error='null'], commandType=io.lettuce.core.protocol.Command]
+2026-02-04T01:10:44.150Z DEBUG 1 --- [musicspace-backend] [nio-8080-exec-7] i.lettuce.core.protocol.DefaultEndpoint  : [channel=0x3c3d531f, /172.18.0.3:32972 -> redis/172.18.0.2:6379, epid=0x2] write() writeAndFlush command AsyncCommand [type=DEL, output=IntegerOutput [output=null, error='null'], commandType=io.lettuce.core.protocol.Command]
+2026-02-04T01:10:44.150Z DEBUG 1 --- [musicspace-backend] [nio-8080-exec-7] i.lettuce.core.protocol.DefaultEndpoint  : [channel=0x3c3d531f, /172.18.0.3:32972 -> redis/172.18.0.2:6379, epid=0x2] write() done
+2026-02-04T01:10:44.150Z DEBUG 1 --- [musicspace-backend] [ioEventLoop-4-2] i.lettuce.core.protocol.CommandHandler   : [channel=0x3c3d531f, /172.18.0.3:32972 -> redis/172.18.0.2:6379, epid=0x2, chid=0x2] write(ctx, AsyncCommand [type=DEL, output=IntegerOutput [output=null, error='null'], commandType=io.lettuce.core.protocol.Command], promise)
+2026-02-04T01:10:44.150Z DEBUG 1 --- [musicspace-backend] [ioEventLoop-4-2] i.lettuce.core.protocol.CommandEncoder   : [channel=0x3c3d531f, /172.18.0.3:32972 -> redis/172.18.0.2:6379] writing command AsyncCommand [type=DEL, output=IntegerOutput [output=null, error='null'], commandType=io.lettuce.core.protocol.Command]
+2026-02-04T01:10:44.151Z DEBUG 1 --- [musicspace-backend] [ioEventLoop-4-2] i.lettuce.core.protocol.CommandHandler   : [channel=0x3c3d531f, /172.18.0.3:32972 -> redis/172.18.0.2:6379, epid=0x2, chid=0x2] Received: 4 bytes, 1 commands in the stack
+2026-02-04T01:10:44.151Z DEBUG 1 --- [musicspace-backend] [ioEventLoop-4-2] i.lettuce.core.protocol.CommandHandler   : [channel=0x3c3d531f, /172.18.0.3:32972 -> redis/172.18.0.2:6379, epid=0x2, chid=0x2] Stack contains: 1 commands
+2026-02-04T01:10:44.151Z DEBUG 1 --- [musicspace-backend] [ioEventLoop-4-2] i.l.core.protocol.RedisStateMachine      : Decode done, empty stack: true
+2026-02-04T01:10:44.151Z DEBUG 1 --- [musicspace-backend] [ioEventLoop-4-2] i.lettuce.core.protocol.CommandHandler   : [channel=0x3c3d531f, /172.18.0.3:32972 -> redis/172.18.0.2:6379, epid=0x2, chid=0x2] Completing command LatencyMeteredCommand [type=DEL, output=IntegerOutput [output=1, error='null'], commandType=io.lettuce.core.protocol.AsyncCommand]
+2026-02-04T01:10:44.151Z DEBUG 1 --- [musicspace-backend] [nio-8080-exec-7] o.s.d.redis.core.RedisConnectionUtils    : Closing Redis Connection
+2026-02-04T01:10:44.152Z DEBUG 1 --- [musicspace-backend] [nio-8080-exec-7] o.s.web.client.RestTemplate              : HTTP POST https://auth.tidal.com/v1/oauth2/token
+2026-02-04T01:10:44.152Z DEBUG 1 --- [musicspace-backend] [nio-8080-exec-7] o.s.web.client.RestTemplate              : Accept=[application/json, application/yaml, application/*+json]
+2026-02-04T01:10:44.152Z DEBUG 1 --- [musicspace-backend] [nio-8080-exec-7] o.s.web.client.RestTemplate              : Writing [{grant_type=[authorization_code], code=[eyJraWQiOiJ2OU1GbFhqWSIsImFsZyI6IkVTMjU2In0.eyJ0eXBlIjoibzJfY29kZSIsInVpZCI6MjAzMzgzMzE3LCJzY29wZSI6InBsYXlsaXN0cy53cml0ZSBjb2xsZWN0aW9uLnJlYWQgdXNlci5yZWFkIHBsYXlsaXN0cy5yZWFkIiwiZXhwIjoxNzcwMTY3NTAzLCJjYWxsYmFja1VyaUlkIjoiNGJkMmVmYjYtMTQ5NC00ZmFiLTlmMDUtMTJhNTMzODZiZThiIiwiY2lkIjoyMzY5NiwiY2hhbGxlbmdlSWQiOiI4MTI1Njg5NS05MGVhLTQxNTktYmU0MC1kZWFjNWE5MDkzM2MiLCJsbSI6InAiLCJpc3MiOiJodHRwczovL2F1dGgudGlkYWwuY29tL3YxIn0.np69YI8vBwEs4A9IVgAJ-jUFovhNNwu61P3vm8K7s1KdYEd7PvW9KOrHlFBqkD20qdPLicT-mAAqJRvlW4_yfQ], redirect_uri=[http://localhost/tidal-callback], code_verifier=[o7jTOO1ZGh3wIcvs-qcGBNKN5Z1SeVGFbb4UqeLLDEk]}] as "application/x-www-form-urlencoded"
+2026-02-04T01:10:44.222Z DEBUG 1 --- [musicspace-backend] [nio-8080-exec-7] jdk.event.security                       :  TLSHandshake: auth.tidal.com:443, TLSv1.3, TLS_AES_128_GCM_SHA256, -670083364
+2026-02-04T01:10:44.222Z DEBUG 1 --- [musicspace-backend] [nio-8080-exec-7] s.n.www.protocol.http.HttpURLConnection  : sun.net.www.MessageHeader@5694c21e8 pairs: {POST /v1/oauth2/token HTTP/1.1: null}{Accept: application/json, application/yaml, application/*+json}{Content-Type: application/x-www-form-urlencoded}{Authorization: Basic UDRwbDlSZ0tVQ0xRTzJhNTpIY1Z3dDBHd0Q2TU9jUlpEQkhyUGRsajIyTVZGR0N2eDRTMVNUV3RTSllFPQ==}{User-Agent: Java/17.0.17}{Host: auth.tidal.com}{Connection: keep-alive}{Content-Length: 652}
+2026-02-04T01:10:44.491Z DEBUG 1 --- [musicspace-backend] [nio-8080-exec-7] s.n.www.protocol.http.HttpURLConnection  : sun.net.www.MessageHeader@38f3d1ec13 pairs: {null: HTTP/1.1 200 OK}{Content-Type: application/json}{Content-Length: 1086}{Connection: keep-alive}{Date: Wed, 04 Feb 2026 01:10:44 GMT}{server: envoy}{cache-control: no-cache}{pragma: no-cache}{x-envoy-upstream-service-time: 78}{X-Cache: Miss from cloudfront}{Via: 1.1 5a0f884e3a21756e824f803c83d7f3d0.cloudfront.net (CloudFront)}{X-Amz-Cf-Pop: ICN57-P2}{X-Amz-Cf-Id: Krt3BdcbVypj2TzWIfhO6W0tNGOXpu_eUa03X64b3wfZ9DFS_0UbGA==}
+2026-02-04T01:10:44.491Z DEBUG 1 --- [musicspace-backend] [nio-8080-exec-7] o.s.web.client.RestTemplate              : Response 200 OK
+2026-02-04T01:10:44.491Z DEBUG 1 --- [musicspace-backend] [nio-8080-exec-7] o.s.web.client.RestTemplate              : Reading to [com.fasterxml.jackson.databind.JsonNode]
+2026-02-04T01:10:44.492Z  INFO 1 --- [musicspace-backend] [nio-8080-exec-7] c.s.f.d.t.service.impl.TidalServiceImpl  : [Tidal] Extracted from JWT - userId: 203383317, countryCode: AR
+2026-02-04T01:10:44.492Z DEBUG 1 --- [musicspace-backend] [nio-8080-exec-7] o.s.d.redis.core.RedisConnectionUtils    : Fetching Redis Connection from RedisConnectionFactory
+2026-02-04T01:10:44.492Z DEBUG 1 --- [musicspace-backend] [nio-8080-exec-7] io.lettuce.core.RedisChannelHandler      : dispatching command AsyncCommand [type=SET, output=StatusOutput [output=null, error='null'], commandType=io.lettuce.core.protocol.Command]
+2026-02-04T01:10:44.492Z DEBUG 1 --- [musicspace-backend] [nio-8080-exec-7] i.lettuce.core.protocol.DefaultEndpoint  : [channel=0x3c3d531f, /172.18.0.3:32972 -> redis/172.18.0.2:6379, epid=0x2] write() writeAndFlush command AsyncCommand [type=SET, output=StatusOutput [output=null, error='null'], commandType=io.lettuce.core.protocol.Command]
+2026-02-04T01:10:44.493Z DEBUG 1 --- [musicspace-backend] [nio-8080-exec-7] i.lettuce.core.protocol.DefaultEndpoint  : [channel=0x3c3d531f, /172.18.0.3:32972 -> redis/172.18.0.2:6379, epid=0x2] write() done
+2026-02-04T01:10:44.493Z DEBUG 1 --- [musicspace-backend] [ioEventLoop-4-2] i.lettuce.core.protocol.CommandHandler   : [channel=0x3c3d531f, /172.18.0.3:32972 -> redis/172.18.0.2:6379, epid=0x2, chid=0x2] write(ctx, AsyncCommand [type=SET, output=StatusOutput [output=null, error='null'], commandType=io.lettuce.core.protocol.Command], promise)
+2026-02-04T01:10:44.493Z DEBUG 1 --- [musicspace-backend] [ioEventLoop-4-2] i.lettuce.core.protocol.CommandEncoder   : [channel=0x3c3d531f, /172.18.0.3:32972 -> redis/172.18.0.2:6379] writing command AsyncCommand [type=SET, output=StatusOutput [output=null, error='null'], commandType=io.lettuce.core.protocol.Command]
+2026-02-04T01:10:44.494Z DEBUG 1 --- [musicspace-backend] [ioEventLoop-4-2] i.lettuce.core.protocol.CommandHandler   : [channel=0x3c3d531f, /172.18.0.3:32972 -> redis/172.18.0.2:6379, epid=0x2, chid=0x2] Received: 5 bytes, 1 commands in the stack
+2026-02-04T01:10:44.494Z DEBUG 1 --- [musicspace-backend] [ioEventLoop-4-2] i.lettuce.core.protocol.CommandHandler   : [channel=0x3c3d531f, /172.18.0.3:32972 -> redis/172.18.0.2:6379, epid=0x2, chid=0x2] Stack contains: 1 commands
+2026-02-04T01:10:44.494Z DEBUG 1 --- [musicspace-backend] [ioEventLoop-4-2] i.l.core.protocol.RedisStateMachine      : Decode done, empty stack: true
+2026-02-04T01:10:44.494Z DEBUG 1 --- [musicspace-backend] [ioEventLoop-4-2] i.lettuce.core.protocol.CommandHandler   : [channel=0x3c3d531f, /172.18.0.3:32972 -> redis/172.18.0.2:6379, epid=0x2, chid=0x2] Completing command LatencyMeteredCommand [type=SET, output=StatusOutput [output=OK, error='null'], commandType=io.lettuce.core.protocol.AsyncCommand]
+2026-02-04T01:10:44.494Z DEBUG 1 --- [musicspace-backend] [nio-8080-exec-7] o.s.d.redis.core.RedisConnectionUtils    : Closing Redis Connection
+2026-02-04T01:10:44.494Z DEBUG 1 --- [musicspace-backend] [nio-8080-exec-7] c.s.f.d.tidal.store.TidalTokenStore      : Saved Tidal token for visitor: visitor_1769879789577_1jc5jrux6
+2026-02-04T01:10:44.494Z DEBUG 1 --- [musicspace-backend] [nio-8080-exec-7] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json, application/yaml]
+2026-02-04T01:10:44.494Z DEBUG 1 --- [musicspace-backend] [nio-8080-exec-7] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [com.springboot.finalprojcet.domain.tidal.dto.TidalExchangeResponse@765ecc65]
+2026-02-04T01:10:44.495Z DEBUG 1 --- [musicspace-backend] [nio-8080-exec-7] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2026-02-04T01:10:44.495Z DEBUG 1 --- [musicspace-backend] [nio-8080-exec-7] o.apache.coyote.http11.Http11Processor   : Error parsing HTTP request header
+
+java.io.EOFException
+	at org.apache.tomcat.util.net.NioEndpoint$NioSocketWrapper.fillReadBuffer(NioEndpoint.java:1333) ~[tomcat-embed-core-10.1.50.jar!/:na]
+	at org.apache.tomcat.util.net.NioEndpoint$NioSocketWrapper.read(NioEndpoint.java:1218) ~[tomcat-embed-core-10.1.50.jar!/:na]
+	at org.apache.coyote.http11.Http11InputBuffer.fill(Http11InputBuffer.java:780) ~[tomcat-embed-core-10.1.50.jar!/:na]
+	at org.apache.coyote.http11.Http11InputBuffer.parseRequestLine(Http11InputBuffer.java:345) ~[tomcat-embed-core-10.1.50.jar!/:na]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:272) ~[tomcat-embed-core-10.1.50.jar!/:na]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63) ~[tomcat-embed-core-10.1.50.jar!/:na]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:903) ~[tomcat-embed-core-10.1.50.jar!/:na]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1774) ~[tomcat-embed-core-10.1.50.jar!/:na]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52) ~[tomcat-embed-core-10.1.50.jar!/:na]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:973) ~[tomcat-embed-core-10.1.50.jar!/:na]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:491) ~[tomcat-embed-core-10.1.50.jar!/:na]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63) ~[tomcat-embed-core-10.1.50.jar!/:na]
+	at java.base/java.lang.Thread.run(Unknown Source) ~[na:na]
+
+2026-02-04T01:10:44.495Z DEBUG 1 --- [musicspace-backend] [nio-8080-exec-7] o.apache.coyote.http11.Http11Processor   : Error state [CLOSE_CONNECTION_NOW] reported while processing request
+
+java.io.EOFException
+	at org.apache.tomcat.util.net.NioEndpoint$NioSocketWrapper.fillReadBuffer(NioEndpoint.java:1333) ~[tomcat-embed-core-10.1.50.jar!/:na]
+	at org.apache.tomcat.util.net.NioEndpoint$NioSocketWrapper.read(NioEndpoint.java:1218) ~[tomcat-embed-core-10.1.50.jar!/:na]
+	at org.apache.coyote.http11.Http11InputBuffer.fill(Http11InputBuffer.java:780) ~[tomcat-embed-core-10.1.50.jar!/:na]
+	at org.apache.coyote.http11.Http11InputBuffer.parseRequestLine(Http11InputBuffer.java:345) ~[tomcat-embed-core-10.1.50.jar!/:na]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:272) ~[tomcat-embed-core-10.1.50.jar!/:na]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63) ~[tomcat-embed-core-10.1.50.jar!/:na]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:903) ~[tomcat-embed-core-10.1.50.jar!/:na]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1774) ~[tomcat-embed-core-10.1.50.jar!/:na]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52) ~[tomcat-embed-core-10.1.50.jar!/:na]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:973) ~[tomcat-embed-core-10.1.50.jar!/:na]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:491) ~[tomcat-embed-core-10.1.50.jar!/:na]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63) ~[tomcat-embed-core-10.1.50.jar!/:na]
+	at java.base/java.lang.Thread.run(Unknown Source) ~[na:na]
+
+2026-02-04T01:10:48.068Z DEBUG 1 --- [musicspace-backend] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - keepalive: connection org.mariadb.jdbc.Connection@352646e1 is alive
+2026-02-04T01:10:57.279Z DEBUG 1 --- [musicspace-backend] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Before cleanup stats (total=6/10, idle=6/5, active=0, waiting=0)
+2026-02-04T01:10:57.280Z DEBUG 1 --- [musicspace-backend] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - After  cleanup stats (total=6/10, idle=6/5, active=0, waiting=0)
+2026-02-04T01:10:57.280Z DEBUG 1 --- [musicspace-backend] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Fill pool skipped, pool has sufficient level or currently being filled.
+2026-02-04T01:10:57.525Z DEBUG 1 --- [musicspace-backend] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - keepalive: connection org.mariadb.jdbc.Connection@39f38102 is alive
+2026-02-04T01:11:03.695Z DEBUG 1 --- [musicspace-backend] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - keepalive: connection org.mariadb.jdbc.Connection@280c3dc0 is alive
+2026-02-04T01:11:08.779Z DEBUG 1 --- [musicspace-backend] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - keepalive: connection org.mariadb.jdbc.Connection@3b433a6d is alive
+2026-02-04T01:11:10.122Z DEBUG 1 --- [musicspace-backend] [nio-8080-exec-1] o.s.security.web.FilterChainProxy        : Securing GET /api/actuator/health
+2026-02-04T01:11:10.123Z DEBUG 1 --- [musicspace-backend] [nio-8080-exec-1] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2026-02-04T01:11:10.124Z DEBUG 1 --- [musicspace-backend] [nio-8080-exec-1] o.s.security.web.FilterChainProxy        : Secured GET /api/actuator/health
+2026-02-04T01:11:10.124Z DEBUG 1 --- [musicspace-backend] [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : GET "/api/actuator/health", parameters={}
+2026-02-04T01:11:10.124Z DEBUG 1 --- [musicspace-backend] [nio-8080-exec-1] s.b.a.e.w.s.WebMvcEndpointHandlerMapping : Mapped to Actuator web endpoint 'health'
+2026-02-04T01:11:10.125Z DEBUG 1 --- [musicspace-backend] [nio-8080-exec-1] m.m.a.RequestResponseBodyMethodProcessor : Read "application/octet-stream" to []
+2026-02-04T01:11:10.126Z DEBUG 1 --- [musicspace-backend] [nio-8080-exec-1] o.s.jdbc.datasource.DataSourceUtils      : Fetching JDBC Connection from DataSource
+2026-02-04T01:11:10.127Z DEBUG 1 --- [musicspace-backend] [nio-8080-exec-1] o.s.jdbc.datasource.DataSourceUtils      : Fetching JDBC Connection from DataSource
+2026-02-04T01:11:10.129Z DEBUG 1 --- [musicspace-backend] [oundedElastic-1] io.lettuce.core.RedisChannelHandler      : dispatching command SubscriptionCommand [type=INFO, output=StatusOutput [output=null, error='null'], commandType=io.lettuce.core.protocol.Command]
+2026-02-04T01:11:10.129Z DEBUG 1 --- [musicspace-backend] [oundedElastic-1] i.lettuce.core.protocol.DefaultEndpoint  : [channel=0xbec6f9d6, /172.18.0.3:48362 -> redis/172.18.0.2:6379, epid=0x1] write() writeAndFlush command SubscriptionCommand [type=INFO, output=StatusOutput [output=null, error='null'], commandType=io.lettuce.core.protocol.Command]
+2026-02-04T01:11:10.129Z DEBUG 1 --- [musicspace-backend] [oundedElastic-1] i.lettuce.core.protocol.DefaultEndpoint  : [channel=0xbec6f9d6, /172.18.0.3:48362 -> redis/172.18.0.2:6379, epid=0x1] write() done
+2026-02-04T01:11:10.129Z DEBUG 1 --- [musicspace-backend] [ioEventLoop-4-1] i.lettuce.core.protocol.CommandHandler   : [channel=0xbec6f9d6, /172.18.0.3:48362 -> redis/172.18.0.2:6379, epid=0x1, chid=0x1] write(ctx, SubscriptionCommand [type=INFO, output=StatusOutput [output=null, error='null'], commandType=io.lettuce.core.protocol.Command], promise)
+2026-02-04T01:11:10.129Z DEBUG 1 --- [musicspace-backend] [ioEventLoop-4-1] i.lettuce.core.protocol.CommandEncoder   : [channel=0xbec6f9d6, /172.18.0.3:48362 -> redis/172.18.0.2:6379] writing command SubscriptionCommand [type=INFO, output=StatusOutput [output=null, error='null'], commandType=io.lettuce.core.protocol.Command]
+2026-02-04T01:11:10.130Z DEBUG 1 --- [musicspace-backend] [ioEventLoop-4-1] i.lettuce.core.protocol.CommandHandler   : [channel=0xbec6f9d6, /172.18.0.3:48362 -> redis/172.18.0.2:6379, epid=0x1, chid=0x1] Received: 649 bytes, 1 commands in the stack
+2026-02-04T01:11:10.130Z DEBUG 1 --- [musicspace-backend] [ioEventLoop-4-1] i.lettuce.core.protocol.CommandHandler   : [channel=0xbec6f9d6, /172.18.0.3:48362 -> redis/172.18.0.2:6379, epid=0x1, chid=0x1] Stack contains: 1 commands
+2026-02-04T01:11:10.130Z DEBUG 1 --- [musicspace-backend] [ioEventLoop-4-1] i.l.core.protocol.RedisStateMachine      : Decode done, empty stack: true
+2026-02-04T01:11:10.130Z DEBUG 1 --- [musicspace-backend] [ioEventLoop-4-1] i.lettuce.core.protocol.CommandHandler   : [channel=0xbec6f9d6, /172.18.0.3:48362 -> redis/172.18.0.2:6379, epid=0x1, chid=0x1] Completing command LatencyMeteredCommand [type=INFO, output=StatusOutput [output=# Server
+redis_version:7.4.7
+redis_git_sha1:00000000
+redis_git_dirty:0
+redis_build_id:95747b95b324f892
+redis_mode:standalone
+os:Linux 6.6.87.2-microsoft-standard-WSL2 x86_64
+arch_bits:64
+monotonic_clock:POSIX clock_gettime
+multiplexing_api:epoll
+atomicvar_api:c11-builtin
+gcc_version:14.2.0
+process_id:1
+process_supervised:no
+run_id:19c05b6a8ee202f59cef4adc67a7c8f1f6aea039
+tcp_port:6379
+server_time_usec:1770167470130333
+uptime_in_seconds:294
+uptime_in_days:0
+hz:10
+configured_hz:10
+lru_clock:8559790
+executable:/data/redis-server
+config_file:
+io_threads_active:0
+listener0:name=tcp,bind=*,bind=-::*,port=6379
+, error='null'], commandType=io.lettuce.core.RedisPublisher$SubscriptionCommand]
+2026-02-04T01:11:10.131Z DEBUG 1 --- [musicspace-backend] [nio-8080-exec-1] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/vnd.spring-boot.actuator.v3+json', given [*/*] and supported [application/vnd.spring-boot.actuator.v3+json, application/vnd.spring-boot.actuator.v2+json, application/json]
+2026-02-04T01:11:10.131Z DEBUG 1 --- [musicspace-backend] [nio-8080-exec-1] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [org.springframework.boot.actuate.health.SystemHealth@5ce3563a]
+2026-02-04T01:11:10.132Z DEBUG 1 --- [musicspace-backend] [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2026-02-04T01:11:15.307Z DEBUG 1 --- [musicspace-backend] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - keepalive: connection org.mariadb.jdbc.Connection@59dc7e4d is alive
+2026-02-04T01:11:25.600Z DEBUG 1 --- [musicspace-backend] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - keepalive: connection org.mariadb.jdbc.Connection@3dbddc58 is alive
+2026-02-04T01:11:27.278Z DEBUG 1 --- [musicspace-backend] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Before cleanup stats (total=6/10, idle=6/5, active=0, waiting=0)
+2026-02-04T01:11:27.278Z DEBUG 1 --- [musicspace-backend] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - After  cleanup stats (total=6/10, idle=6/5, active=0, waiting=0)
+2026-02-04T01:11:27.278Z DEBUG 1 --- [musicspace-backend] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Fill pool skipped, pool has sufficient level or currently being filled.
+2026-02-04T01:11:40.203Z DEBUG 1 --- [musicspace-backend] [nio-8080-exec-4] o.s.security.web.FilterChainProxy        : Securing GET /api/actuator/health
+2026-02-04T01:11:40.203Z DEBUG 1 --- [musicspace-backend] [nio-8080-exec-4] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2026-02-04T01:11:40.204Z DEBUG 1 --- [musicspace-backend] [nio-8080-exec-4] o.s.security.web.FilterChainProxy        : Secured GET /api/actuator/health
+2026-02-04T01:11:40.204Z DEBUG 1 --- [musicspace-backend] [nio-8080-exec-4] o.s.web.servlet.DispatcherServlet        : GET "/api/actuator/health", parameters={}
+2026-02-04T01:11:40.204Z DEBUG 1 --- [musicspace-backend] [nio-8080-exec-4] s.b.a.e.w.s.WebMvcEndpointHandlerMapping : Mapped to Actuator web endpoint 'health'
+2026-02-04T01:11:40.205Z DEBUG 1 --- [musicspace-backend] [nio-8080-exec-4] m.m.a.RequestResponseBodyMethodProcessor : Read "application/octet-stream" to []
+2026-02-04T01:11:40.205Z DEBUG 1 --- [musicspace-backend] [nio-8080-exec-4] o.s.jdbc.datasource.DataSourceUtils      : Fetching JDBC Connection from DataSource
+2026-02-04T01:11:40.206Z DEBUG 1 --- [musicspace-backend] [nio-8080-exec-4] o.s.jdbc.datasource.DataSourceUtils      : Fetching JDBC Connection from DataSource
+2026-02-04T01:11:40.207Z DEBUG 1 --- [musicspace-backend] [oundedElastic-1] io.lettuce.core.RedisChannelHandler      : dispatching command SubscriptionCommand [type=INFO, output=StatusOutput [output=null, error='null'], commandType=io.lettuce.core.protocol.Command]
+2026-02-04T01:11:40.208Z DEBUG 1 --- [musicspace-backend] [oundedElastic-1] i.lettuce.core.protocol.DefaultEndpoint  : [channel=0xbec6f9d6, /172.18.0.3:48362 -> redis/172.18.0.2:6379, epid=0x1] write() writeAndFlush command SubscriptionCommand [type=INFO, output=StatusOutput [output=null, error='null'], commandType=io.lettuce.core.protocol.Command]
+2026-02-04T01:11:40.208Z DEBUG 1 --- [musicspace-backend] [oundedElastic-1] i.lettuce.core.protocol.DefaultEndpoint  : [channel=0xbec6f9d6, /172.18.0.3:48362 -> redis/172.18.0.2:6379, epid=0x1] write() done
+2026-02-04T01:11:40.208Z DEBUG 1 --- [musicspace-backend] [ioEventLoop-4-1] i.lettuce.core.protocol.CommandHandler   : [channel=0xbec6f9d6, /172.18.0.3:48362 -> redis/172.18.0.2:6379, epid=0x1, chid=0x1] write(ctx, SubscriptionCommand [type=INFO, output=StatusOutput [output=null, error='null'], commandType=io.lettuce.core.protocol.Command], promise)
+2026-02-04T01:11:40.208Z DEBUG 1 --- [musicspace-backend] [ioEventLoop-4-1] i.lettuce.core.protocol.CommandEncoder   : [channel=0xbec6f9d6, /172.18.0.3:48362 -> redis/172.18.0.2:6379] writing command SubscriptionCommand [type=INFO, output=StatusOutput [output=null, error='null'], commandType=io.lettuce.core.protocol.Command]
+2026-02-04T01:11:40.209Z DEBUG 1 --- [musicspace-backend] [ioEventLoop-4-1] i.lettuce.core.protocol.CommandHandler   : [channel=0xbec6f9d6, /172.18.0.3:48362 -> redis/172.18.0.2:6379, epid=0x1, chid=0x1] Received: 649 bytes, 1 commands in the stack
+2026-02-04T01:11:40.209Z DEBUG 1 --- [musicspace-backend] [ioEventLoop-4-1] i.lettuce.core.protocol.CommandHandler   : [channel=0xbec6f9d6, /172.18.0.3:48362 -> redis/172.18.0.2:6379, epid=0x1, chid=0x1] Stack contains: 1 commands
+2026-02-04T01:11:40.210Z DEBUG 1 --- [musicspace-backend] [ioEventLoop-4-1] i.l.core.protocol.RedisStateMachine      : Decode done, empty stack: true
+2026-02-04T01:11:40.210Z DEBUG 1 --- [musicspace-backend] [ioEventLoop-4-1] i.lettuce.core.protocol.CommandHandler   : [channel=0xbec6f9d6, /172.18.0.3:48362 -> redis/172.18.0.2:6379, epid=0x1, chid=0x1] Completing command LatencyMeteredCommand [type=INFO, output=StatusOutput [output=# Server
+redis_version:7.4.7
+redis_git_sha1:00000000
+redis_git_dirty:0
+redis_build_id:95747b95b324f892
+redis_mode:standalone
+os:Linux 6.6.87.2-microsoft-standard-WSL2 x86_64
+arch_bits:64
+monotonic_clock:POSIX clock_gettime
+multiplexing_api:epoll
+atomicvar_api:c11-builtin
+gcc_version:14.2.0
+process_id:1
+process_supervised:no
+run_id:19c05b6a8ee202f59cef4adc67a7c8f1f6aea039
+tcp_port:6379
+server_time_usec:1770167500209381
+uptime_in_seconds:324
+uptime_in_days:0
+hz:10
+configured_hz:10
+lru_clock:8559820
+executable:/data/redis-server
+config_file:
+io_threads_active:0
+listener0:name=tcp,bind=*,bind=-::*,port=6379
+, error='null'], commandType=io.lettuce.core.RedisPublisher$SubscriptionCommand]
+2026-02-04T01:11:40.211Z DEBUG 1 --- [musicspace-backend] [nio-8080-exec-4] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/vnd.spring-boot.actuator.v3+json', given [*/*] and supported [application/vnd.spring-boot.actuator.v3+json, application/vnd.spring-boot.actuator.v2+json, application/json]
+2026-02-04T01:11:40.211Z DEBUG 1 --- [musicspace-backend] [nio-8080-exec-4] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [org.springframework.boot.actuate.health.SystemHealth@2608b8c1]
+2026-02-04T01:11:40.213Z DEBUG 1 --- [musicspace-backend] [nio-8080-exec-4] o.s.web.servlet.DispatcherServlet        : Completed 200 OK

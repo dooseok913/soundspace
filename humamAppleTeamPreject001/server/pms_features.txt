@@ -1,0 +1,57 @@
+Searching for tracks with space_type = 'PMS'...
+Found 50 tracks. Displaying features:
+
+┌─────────┬────────────────────────────────────────────────┬───────────────────────────┬───────┬────────┬─────────┬──────────────┬──────────────┬──────────────────┬──────────┬─────────────┬──────────┐
+│ (index) │ title                                          │ artist                    │ tempo │ energy │ valence │ danceability │ acousticness │ instrumentalness │ liveness │ speechiness │ loudness │
+├─────────┼────────────────────────────────────────────────┼───────────────────────────┼───────┼────────┼─────────┼──────────────┼──────────────┼──────────────────┼──────────┼─────────────┼──────────┤
+│ 0       │ 'I Miss You So'                                │ 'Samara Joy'              │ null  │ null   │ null    │ null         │ null         │ null             │ null     │ null        │ null     │
+│ 1       │ 'Autumn In New York'                           │ 'Billie Holiday'          │ null  │ null   │ null    │ null         │ null         │ null             │ null     │ null        │ null     │
+│ 2       │ 'Take Five'                                    │ 'Dave Brubeck'            │ null  │ null   │ null    │ null         │ null         │ null             │ null     │ null        │ null     │
+│ 3       │ 'Boplicity'                                    │ 'Miles Davis'             │ null  │ null   │ null    │ null         │ null         │ null             │ null     │ null        │ null     │
+│ 4       │ 'In A Sentimental Mood'                        │ 'Duke Ellington'          │ null  │ null   │ null    │ null         │ null         │ null             │ null     │ null        │ null     │
+│ 5       │ "'Round Midnight"                              │ 'Thelonious Monk'         │ null  │ null   │ null    │ null         │ null         │ null             │ null     │ null        │ null     │
+│ 6       │ 'You Are Too Beautiful'                        │ 'John Coltrane'           │ null  │ null   │ null    │ null         │ null         │ null             │ null     │ null        │ null     │
+│ 7       │ 'Where Are You?'                               │ 'Joshua Redman'           │ null  │ null   │ null    │ null         │ null         │ null             │ null     │ null        │ null     │
+│ 8       │ 'Old Folks'                                    │ 'Chris Botti'             │ null  │ null   │ null    │ null         │ null         │ null             │ null     │ null        │ null     │
+│ 9       │ 'Blame It On My Youth'                         │ 'Nat King Cole'           │ null  │ null   │ null    │ null         │ null         │ null             │ null     │ null        │ null     │
+│ 10      │ 'Solitude'                                     │ 'Billie Holiday'          │ null  │ null   │ null    │ null         │ null         │ null             │ null     │ null        │ null     │
+│ 11      │ 'It Never Entered My Mind'                     │ 'Miles Davis'             │ null  │ null   │ null    │ null         │ null         │ null             │ null     │ null        │ null     │
+│ 12      │ 'These Foolish Things'                         │ 'Stan Getz'               │ null  │ null   │ null    │ null         │ null         │ null             │ null     │ null        │ null     │
+│ 13      │ 'September Song'                               │ 'Chet Baker'              │ null  │ null   │ null    │ null         │ null         │ null             │ null     │ null        │ null     │
+│ 14      │ "'Tis Autumn"                                  │ 'Ella Fitzgerald'         │ null  │ null   │ null    │ null         │ null         │ null             │ null     │ null        │ null     │
+│ 15      │ 'Love Is Here To Stay'                         │ 'Blossom Dearie'          │ null  │ null   │ null    │ null         │ null         │ null             │ null     │ null        │ null     │
+│ 16      │ 'Waltz Me Blues'                               │ 'Art Pepper'              │ null  │ null   │ null    │ null         │ null         │ null             │ null     │ null        │ null     │
+│ 17      │ "You're My Everything"                         │ 'Miles Davis'             │ null  │ null   │ null    │ null         │ null         │ null             │ null     │ null        │ null     │
+│ 18      │ 'Dolphin Dance'                                │ 'Ahmad Jamal Trio'        │ null  │ null   │ null    │ null         │ null         │ null             │ null     │ null        │ null     │
+│ 19      │ "I'll Close My Eyes"                           │ 'Blue Mitchell'           │ null  │ null   │ null    │ null         │ null         │ null             │ null     │ null        │ null     │
+│ 20      │ "Foolin' Myself"                               │ 'Lee Konitz'              │ null  │ null   │ null    │ null         │ null         │ null             │ null     │ null        │ null     │
+│ 21      │ 'My Lady'                                      │ 'Stan Kenton'             │ null  │ null   │ null    │ null         │ null         │ null             │ null     │ null        │ null     │
+│ 22      │ 'Speak Low'                                    │ 'Coleman Hawkins'         │ null  │ null   │ null    │ null         │ null         │ null             │ null     │ null        │ null     │
+│ 23      │ 'Days Of Wine And Roses'                       │ 'McCoy Tyner'             │ null  │ null   │ null    │ null         │ null         │ null             │ null     │ null        │ null     │
+│ 24      │ 'Fools Rush In'                                │ 'Peggy Lee'               │ null  │ null   │ null    │ null         │ null         │ null             │ null     │ null        │ null     │
+│ 25      │ 'Misty'                                        │ 'Sarah Vaughan'           │ null  │ null   │ null    │ null         │ null         │ null             │ null     │ null        │ null     │
+│ 26      │ 'Emily'                                        │ 'Bill Evans'              │ null  │ null   │ null    │ null         │ null         │ null             │ null     │ null        │ null     │
+│ 27      │ "You're Mine, You!"                            │ 'Chet Baker'              │ null  │ null   │ null    │ null         │ null         │ null             │ null     │ null        │ null     │
+│ 28      │ 'When I Fall In Love'                          │ 'Bill Evans'              │ null  │ null   │ null    │ null         │ null         │ null             │ null     │ null        │ null     │
+│ 29      │ "Here's That Rainy Day"                        │ 'Joe Pass'                │ null  │ null   │ null    │ null         │ null         │ null             │ null     │ null        │ null     │
+│ 30      │ 'In Your Own Sweet Way'                        │ 'Wes Montgomery'          │ null  │ null   │ null    │ null         │ null         │ null             │ null     │ null        │ null     │
+│ 31      │ 'On Green Dolphin Street'                      │ 'Vince Guaraldi'          │ null  │ null   │ null    │ null         │ null         │ null             │ null     │ null        │ null     │
+│ 32      │ 'No More Goodbyes'                             │ 'Hank Mobley'             │ null  │ null   │ null    │ null         │ null         │ null             │ null     │ null        │ null     │
+│ 33      │ 'Tenderly'                                     │ 'Chet Baker'              │ null  │ null   │ null    │ null         │ null         │ null             │ null     │ null        │ null     │
+│ 34      │ 'Topsy'                                        │ 'Lee Konitz'              │ null  │ null   │ null    │ null         │ null         │ null             │ null     │ null        │ null     │
+│ 35      │ 'September In The Rain'                        │ 'Eddie Higgins Trio'      │ null  │ null   │ null    │ null         │ null         │ null             │ null     │ null        │ null     │
+│ 36      │ "I'll Remember April"                          │ 'George Shearing'         │ null  │ null   │ null    │ null         │ null         │ null             │ null     │ null        │ null     │
+│ 37      │ 'Custard Puff'                                 │ 'Barney Kessel'           │ null  │ null   │ null    │ null         │ null         │ null             │ null     │ null        │ null     │
+│ 38      │ 'Moonlight In Vermont'                         │ 'Zoot Sims'               │ null  │ null   │ null    │ null         │ null         │ null             │ null     │ null        │ null     │
+│ 39      │ 'Stardust'                                     │ 'Dave Brubeck'            │ null  │ null   │ null    │ null         │ null         │ null             │ null     │ null        │ null     │
+│ 40      │ 'Nobody Else But Me'                           │ 'Stan Getz'               │ null  │ null   │ null    │ null         │ null         │ null             │ null     │ null        │ null     │
+│ 41      │ 'Just In Time'                                 │ 'Bud Shank'               │ null  │ null   │ null    │ null         │ null         │ null             │ null     │ null        │ null     │
+│ 42      │ 'Ghost of a Chance'                            │ 'Lennie Tristano'         │ null  │ null   │ null    │ null         │ null         │ null             │ null     │ null        │ null     │
+│ 43      │ 'Thanks For The Memory'                        │ 'Jim Hall'                │ null  │ null   │ null    │ null         │ null         │ null             │ null     │ null        │ null     │
+│ 44      │ "I Can't Get Started"                          │ 'John Lewis'              │ null  │ null   │ null    │ null         │ null         │ null             │ null     │ null        │ null     │
+│ 45      │ 'Midnight Blue'                                │ 'Kenny Burrell'           │ null  │ null   │ null    │ null         │ null         │ null             │ null     │ null        │ null     │
+│ 46      │ "Here's That Rainy Day (Carnival Of Flanders)" │ 'The Modern Jazz Quartet' │ null  │ null   │ null    │ null         │ null         │ null             │ null     │ null        │ null     │
+│ 47      │ 'The Quiet Time'                               │ 'Teddy Charles'           │ null  │ null   │ null    │ null         │ null         │ null             │ null     │ null        │ null     │
+│ 48      │ 'The Touch Of Your Lips'                       │ 'Ben Webster'             │ null  │ null   │ null    │ null         │ null         │ null             │ null     │ null        │ null     │
+│ 49      │ 'Nancy'                                        │ 'Paul Desmond'            │ null  │ null   │ null    │ null         │ null         │ null             │ null     │ null        │ null     │
+└─────────┴────────────────────────────────────────────────┴───────────────────────────┴───────┴────────┴─────────┴──────────────┴──────────────┴──────────────────┴──────────┴─────────────┴──────────┘

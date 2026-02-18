@@ -1,0 +1,22 @@
+artifact_path: file:///D:\lecture\colab\final\integrated\FAST_API\mlflow_tracking/mlruns/493583358063947268/models/m-db1aa571393e47959df8b82947f6d005/artifacts
+flavors:
+  catboost:
+    catboost_version: 1.2.8
+    code: null
+    data: model.cb
+    model_type: CatBoostClassifier
+    save_format: cbm
+  python_function:
+    data: model.cb
+    env:
+      conda: conda.yaml
+      virtualenv: python_env.yaml
+    loader_module: mlflow.catboost
+    python_version: 3.10.6
+mlflow_version: 3.9.0
+model_id: m-db1aa571393e47959df8b82947f6d005
+model_size_bytes: 161964
+model_uuid: m-db1aa571393e47959df8b82947f6d005
+prompts: null
+run_id: 422288f313ca4c91a9a6d858d38099f9
+utc_time_created: '2026-02-17 07:29:13.739808'

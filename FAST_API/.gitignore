@@ -1,0 +1,53 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual Environment
+venv/
+env/
+ENV/
+.env
+
+# PyCharm
+.idea/
+
+# VS Code
+.vscode/
+
+# Local settings
+*.local
+
+# Large model files (upload via FTP)
+LLM/L1/models/*.npy
+LLM/L1/*.zip
+
+# Large data files (ChromaDB, models, archives)
+LLM/L2/data/chroma_db/
+LLM/L2/data/*.csv
+LLM/L2/data/*.parquet
+LLM/L2/*.7z
+LLM/L2/*.zip
+
+# User-specific trained models (runtime generated)
+M1/user_models/
+M2/user_svm_models/
+M3/user_models/*.cbm

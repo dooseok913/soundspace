@@ -1,0 +1,101 @@
+spring:
+  application:
+    name: musicspace-backend
+
+  # Database Configuration
+  datasource:
+    url: jdbc:mariadb://${DB_HOST:localhost}:${DB_PORT:3306}/${DB_NAME:music_space_db}?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Seoul&characterEncoding=UTF-8
+    username: ${DB_USER:musicspace}
+    password: ${DB_PASSWORD:musicspace123}
+    driver-class-name: org.mariadb.jdbc.Driver
+    hikari:
+      maximum-pool-size: 10
+      minimum-idle: 5
+      connection-timeout: 30000
+      idle-timeout: 600000
+      max-lifetime: 1800000
+
+  # JPA Configuration
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.MariaDBDialect
+    open-in-view: false
+
+  # Redis Configuration
+  data:
+    redis:
+      host: ${REDIS_HOST:redis}
+      port: ${REDIS_PORT:6379}
+      timeout: 6000ms
+
+# Server Configuration
+server:
+  port: ${SERVER_PORT:8080}
+  servlet:
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+
+# JWT Configuration
+jwt:
+  secret: ${JWT_SECRET:MusicSpaceSecretKeyForJWTAuthentication2024VeryLongKeyHere}
+  access-token-expiration: 3600000
+  refresh-token-expiration: 604800000
+
+# Logging
+logging:
+  level:
+    root: DEBUG
+    com.springboot.finalprojcet: DEBUG
+    org.hibernate.SQL: DEBUG
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+
+# Swagger Configuration
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+    operations-sorter: alpha
+    tags-sorter: alpha
+
+# Actuator Configuration
+management:
+  endpoints:
+    web:
+      base-path: /api/actuator
+      exposure:
+        include: health,info
+  endpoint:
+    health:
+      show-details: when_authorized
+
+# Tidal API Configuration
+# Default credentials from python-tidal (tidalapi) library for streaming support
+tidal:
+  client-id: ${TIDAL_CLIENT_ID:fX2JxdmntZWK0ixT}
+  client-secret: ${TIDAL_CLIENT_SECRET:1Nn9AfDAjxrgJFJbKNWLeAyKGVGmINuXPPLHVXAvxAg=}
+  auth-url: https://auth.tidal.com/v1/oauth2
+  api-url: https://api.tidal.com/v1
+  redirect-uri: ${TIDAL_REDIRECT_URI:http://localhost/tidal-callback}
+
+# FastAPI AI Server Configuration
+fastapi:
+  url: ${FASTAPI_URL:http://fastapi:8000}
+
+# Spotify API Configuration
+spotify:
+  client-id: ${SPOTIFY_CLIENT_ID:}
+  client-secret: ${SPOTIFY_CLIENT_SECRET:}
+
+# YouTube API Configuration
+youtube:
+  key: ${YOUTUBE_KEY:}
+  client-id: ${YOUTUBE_CLIENT_ID:}
+  client-secret: ${YOUTUBE_CLIENT_SECRET:}

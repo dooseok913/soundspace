@@ -1,0 +1,14 @@
+artifact_uri: file:///D:\lecture\colab\final\integrated\FAST_API\mlflow_tracking/mlruns/889664143614765602/1af0377330554973a2a574ed33e16ac9/artifacts
+end_time: 1771313360656
+entry_point_name: ''
+experiment_id: '889664143614765602'
+lifecycle_stage: active
+run_id: 1af0377330554973a2a574ed33e16ac9
+run_name: M1_tuning_2
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1771313359745
+status: 3
+tags: []
+user_id: human-06

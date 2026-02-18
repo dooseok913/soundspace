@@ -1,0 +1,427 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================================
+   THEME VARIABLES
+   ============================================ */
+:root {
+  /* Default Theme (HUD / Cyberpunk) */
+  --hud-bg-primary: #0E1726;
+  --hud-bg-secondary: #141B2D;
+  --hud-bg-card: rgba(20, 27, 45, 0.8);
+  --hud-bg-hover: rgba(30, 40, 60, 0.9);
+
+  --hud-text-primary: #FFFFFF;
+  --hud-text-secondary: #A0AEC0;
+  --hud-text-muted: #64748B;
+
+  --hud-accent-primary: #00FFCC;
+  /* Cyan */
+  --hud-accent-secondary: #FF1493;
+  /* Pink */
+
+  --hud-border-primary: rgba(0, 255, 204, 0.3);
+  --hud-border-secondary: rgba(255, 255, 255, 0.1);
+
+  /* Semantic Colors (Default) */
+  --hud-accent-info: #6366F1;
+  --hud-accent-success: #10B981;
+  --hud-accent-warning: #FFA500;
+  --hud-accent-error: #EF4444;
+}
+
+/* Jazz Cafe Theme */
+/* Jazz Cafe Theme */
+.theme-jazz {
+  /* Warm Dark Brown Backgrounds */
+  --hud-bg-primary: #1A120B;
+  /* Deep Coffee */
+  --hud-bg-secondary: #2C1F16;
+  /* Dark Wood */
+  --hud-bg-card: rgba(44, 31, 22, 0.9);
+  /* Mahogany w/ higher opacity for better readability */
+  --hud-bg-hover: rgba(60, 42, 30, 0.95);
+
+  --hud-text-primary: #E5D0AC;
+  /* Warm Beige */
+  --hud-text-secondary: #C2A878;
+  /* Muted Gold */
+  --hud-text-muted: #8C7A5B;
+
+  --hud-accent-primary: #D4AF37;
+  /* Classic Gold */
+  --hud-accent-secondary: #C96825;
+  /* Burnt Orange */
+  --hud-accent-info: #8B4513;
+  /* Saddle Brown for info accents */
+  --hud-accent-success: #556B2F;
+  /* Olive Green */
+  --hud-accent-warning: #DAA520;
+  /* Goldenrod */
+  --hud-accent-error: #8B0000;
+  /* Dark Red */
+
+  --hud-border-primary: rgba(212, 175, 55, 0.5);
+  /* Gold Border */
+  --hud-border-secondary: rgba(229, 208, 172, 0.2);
+}
+
+/* Soul Theme (Pastel Blue) */
+.theme-soul {
+  /* Pastel Blue & Slate Palette */
+  --hud-bg-primary: #1E293B;
+  /* Slate 800 */
+  --hud-bg-secondary: #334155;
+  /* Slate 700 */
+  --hud-bg-card: rgba(30, 41, 59, 0.85);
+  /* Slate 800 alpha */
+  --hud-bg-hover: rgba(51, 65, 85, 0.9);
+
+  --hud-text-primary: #F1F5F9;
+  /* Slate 100 */
+  --hud-text-secondary: #CBD5E1;
+  /* Slate 300 */
+  --hud-text-muted: #94A3B8;
+  /* Slate 400 */
+
+  --hud-accent-primary: #93C5FD;
+  /* Pastel Blue */
+  --hud-accent-secondary: #A5F3FC;
+  /* Pastel Cyan */
+  --hud-accent-info: #60A5FA;
+  /* Blue 400 */
+  --hud-accent-success: #67E8F9;
+  /* Cyan 300 */
+  --hud-accent-warning: #FDBA74;
+  /* Pastel Orange */
+  --hud-accent-error: #F87171;
+  /* Pastel Red */
+
+  --hud-border-primary: rgba(147, 197, 253, 0.5);
+  /* Blue 300 alpha */
+  --hud-border-secondary: rgba(165, 243, 252, 0.2);
+}
+
+/* Global Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  overflow: hidden;
+  height: 100vh;
+}
+
+body {
+  font-family: 'Inter', 'Roboto', system-ui, sans-serif;
+  background-color: var(--hud-bg-primary);
+  color: var(--hud-text-primary);
+  transition: background-color 0.5s ease, color 0.5s ease;
+}
+
+/* HUD Grid Background */
+.hud-grid-bg {
+  background-image:
+    linear-gradient(rgba(0, 255, 204, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 255, 204, 0.03) 1px, transparent 1px);
+  background-size: 50px 50px;
+}
+
+/* Theme-specific Grid for Jazz */
+.theme-jazz .hud-grid-bg {
+  background-image:
+    linear-gradient(rgba(26, 18, 11, 0.7), rgba(26, 18, 11, 0.8)),
+    url("/images/theme/jazz_bg_new.png");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+
+/* Theme-specific Grid for Soul */
+.theme-soul .hud-grid-bg {
+  background-image:
+    linear-gradient(rgba(30, 41, 59, 0.7), rgba(30, 41, 59, 0.6)),
+    var(--soul-bg-image, url("/images/theme/soul_bg_new_1.png"));
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  transition: background-image 1s ease-in-out;
+}
+
+/* HUD Card Corner Brackets */
+.hud-card {
+  position: relative;
+  background: var(--hud-bg-card);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--hud-border-secondary);
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.hud-card::before,
+.hud-card::after {
+  content: '';
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border-color: var(--hud-border-primary);
+  border-style: solid;
+  transition: border-color 0.3s ease;
+}
+
+.hud-card::before {
+  top: -1px;
+  left: -1px;
+  border-width: 2px 0 0 2px;
+}
+
+.hud-card::after {
+  top: -1px;
+  right: -1px;
+  border-width: 2px 2px 0 0;
+}
+
+.hud-card-bottom::before,
+.hud-card-bottom::after {
+  content: '';
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border-color: var(--hud-border-primary);
+  border-style: solid;
+  transition: border-color 0.3s ease;
+}
+
+.hud-card-bottom::before {
+  bottom: -1px;
+  left: -1px;
+  border-width: 0 0 2px 2px;
+}
+
+.hud-card-bottom::after {
+  bottom: -1px;
+  right: -1px;
+  border-width: 0 2px 2px 0;
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--hud-bg-secondary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--hud-border-primary);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--hud-accent-primary);
+}
+
+/* Glow Effects */
+.glow-primary {
+  box-shadow: 0 0 20px rgba(0, 255, 204, 0.3);
+}
+
+.glow-pink {
+  box-shadow: 0 0 20px rgba(255, 20, 147, 0.3);
+}
+
+.glow-orange {
+  box-shadow: 0 0 20px rgba(255, 165, 0, 0.3);
+}
+
+/* Button Hover Glow */
+.btn-glow:hover {
+  box-shadow: 0 0 25px rgba(0, 255, 204, 0.4);
+  transform: translateY(-1px);
+}
+
+/* Text Glow */
+.text-glow {
+  text-shadow: 0 0 10px rgba(0, 255, 204, 0.5);
+}
+
+/* Menu Item Active State */
+.menu-active {
+  background: linear-gradient(90deg, rgba(0, 255, 204, 0.1) 0%, transparent 100%);
+  border-left: 3px solid #00FFCC;
+}
+
+/* Transitions */
+.transition-hud {
+  transition: all 0.2s ease-in-out;
+}
+
+/* Chart Glow Effect */
+.chart-glow {
+  filter: drop-shadow(0 0 8px rgba(0, 255, 204, 0.3));
+}
+
+/* ============================================
+   MUSIC APP STYLES
+   ============================================ */
+
+/* Music Gradients */
+.music-gradient-primary {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.music-gradient-accent {
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+}
+
+.music-gradient-bg {
+  background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+}
+
+.ems-gradient-primary {
+  background: linear-gradient(135deg, #eab308 0%, #f59e0b 100%);
+}
+
+.ems-gradient-bg {
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+}
+
+/* Music Text Gradient */
+.music-text-gradient {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.ems-text-gradient {
+  background: linear-gradient(135deg, #eab308 0%, #f59e0b 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Music Card Styles */
+.music-card {
+  @apply hud-card;
+  background: rgba(30, 30, 50, 0.8);
+  transition: all 0.4s ease;
+}
+
+.music-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+}
+
+/* Music Player Styles */
+.music-player {
+  background: rgba(15, 12, 41, 0.98);
+  backdrop-filter: blur(30px);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Playlist Card Play Overlay */
+.play-overlay {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.playlist-card:hover .play-overlay {
+  opacity: 1;
+}
+
+/* Progress Bar Styles */
+.progress-bar {
+  position: relative;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+  transition: width 0.1s ease;
+}
+
+/* Confidence Score Badge */
+.confidence-score {
+  background: rgba(102, 234, 147, 0.15);
+  color: #66ea93;
+}
+
+/* Status Badges */
+.status-unverified {
+  background: rgba(234, 179, 8, 0.2);
+  color: #eab308;
+  border: 1px solid rgba(234, 179, 8, 0.3);
+}
+
+.status-processing {
+  background: rgba(59, 130, 246, 0.2);
+  color: #3b82f6;
+  border: 1px solid rgba(59, 130, 246, 0.3);
+}
+
+.status-ready {
+  background: rgba(34, 197, 94, 0.2);
+  color: #22c55e;
+  border: 1px solid rgba(34, 197, 94, 0.3);
+}
+
+/* Spinner Animation */
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.spinner {
+  animation: spin 1s linear infinite;
+}
+
+/* Music Glow Effects */
+.music-glow {
+  box-shadow: 0 0 20px rgba(102, 126, 234, 0.3);
+}
+
+.music-glow:hover {
+  box-shadow: 0 0 30px rgba(102, 126, 234, 0.5);
+}
+
+.ems-glow {
+  box-shadow: 0 0 20px rgba(234, 179, 8, 0.3);
+}
+
+.ems-glow:hover {
+  box-shadow: 0 0 30px rgba(234, 179, 8, 0.5);
+}
+
+/* Jazz Theme specific animations */
+@keyframes vinyl-spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-vinyl-spin {
+  animation: vinyl-spin 8s linear infinite;
+}
+
+.paused {
+  animation-play-state: paused;
+}

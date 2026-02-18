@@ -1,0 +1,208 @@
+# ============================================================
+# MusicSpace 풀스택 로컬 빌드 (MacBook)
+# 사용법: docker compose -f docker-compose.fullstack-local.yml up -d
+# ============================================================
+#
+# [서비스별 수정 반영 방법]
+#   프론트엔드(.tsx): npm run build → 자동 반영 (dist/ 볼륨 마운트)
+#   FastAPI(.py):     docker restart musicspace-fastapi (소스 볼륨 마운트)
+#   Spring Boot:      docker compose -f docker-compose.fullstack-local.yml up -d --no-deps --build spring-backend
+#   Node.js:          docker compose -f docker-compose.fullstack-local.yml up -d --no-deps --build backend
+#
+# [주의] 프론트/FastAPI는 --build 불필요. Spring/Node만 --build 필요.
+# ============================================================
+
+services:
+
+  # ── DB ──────────────────────────────────────────────────────
+  db:
+    image: mariadb:10.11
+    container_name: musicspace-db
+    restart: unless-stopped
+    environment:
+      MARIADB_ROOT_PASSWORD: ${DB_ROOT_PASSWORD:-musicspace123}
+      MARIADB_DATABASE: ${DB_NAME:-music_space_db}
+      MARIADB_USER: ${DB_USER:-musicspace}
+      MARIADB_PASSWORD: ${DB_PASSWORD:-musicspace123}
+    ports:
+      - "3309:3306"
+    volumes:
+      - mariadb_data:/var/lib/mysql
+      - ./music_space_db_dump.sql:/docker-entrypoint-initdb.d/init.sql
+    command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    healthcheck:
+      test: [ "CMD", "healthcheck.sh", "--connect", "--innodb_initialized" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - musicspace-network
+
+  # ── Redis ───────────────────────────────────────────────────
+  redis:
+    image: redis:7-alpine
+    container_name: musicspace-redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    command: redis-server --appendonly yes
+    healthcheck:
+      test: [ "CMD", "redis-cli", "ping" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - musicspace-network
+
+  # ── Spring Boot (Java) ─────────────────────────────────────
+  # 수정 반영: --build 필요 (Gradle 빌드)
+  spring-backend:
+    build:
+      context: ../2TeamFinalProject-BE
+      dockerfile: Dockerfile
+    container_name: musicspace-spring-backend
+    restart: unless-stopped
+    environment:
+      DB_HOST: db
+      DB_PORT: 3306
+      DB_USER: ${DB_USER:-musicspace}
+      DB_PASSWORD: ${DB_PASSWORD:-musicspace123}
+      DB_NAME: ${DB_NAME:-music_space_db}
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      JWT_SECRET: ${JWT_SECRET:-MusicSpaceSecretKeyForJWTAuthentication2024VeryLongKeyHereNeedAtLeast256BitsForHS256Algorithm}
+      SERVER_PORT: 8080
+      TIDAL_CLIENT_ID: ${TIDAL_CLIENT_ID:-}
+      TIDAL_CLIENT_SECRET: ${TIDAL_CLIENT_SECRET:-}
+      TIDAL_REDIRECT_URI: ${TIDAL_REDIRECT_URI:-http://localhost/tidal-callback}
+      SPOTIFY_CLIENT_ID: ${SPOTIFY_CLIENT_ID:-}
+      SPOTIFY_CLIENT_SECRET: ${SPOTIFY_CLIENT_SECRET:-}
+      YOUTUBE_KEY: ${YOUTUBE_KEY:-}
+      YOUTUBE_CLIENT_ID: ${YOUTUBE_CLIENT_ID:-}
+      YOUTUBE_CLIENT_SECRET: ${YOUTUBE_CLIENT_SECRET:-}
+      FASTAPI_URL: http://fastapi:8000
+    ports:
+      - "8080:8080"
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    volumes:
+      - ./public/uploads:/app/uploads
+    networks:
+      - musicspace-network
+
+  # ── FastAPI AI/ML (Python) ─────────────────────────────────
+  # 수정 반영: docker restart musicspace-fastapi (소스 볼륨 마운트됨)
+  fastapi:
+    build:
+      context: ../FAST_API
+      dockerfile: Dockerfile
+    container_name: musicspace-fastapi
+    restart: unless-stopped
+    environment:
+      ENVIRONMENT: production
+      PORT: 8000
+      DB_HOST: db
+      DB_PORT: 3306
+      DB_USER: ${DB_USER:-musicspace}
+      DB_PASSWORD: ${DB_PASSWORD:-musicspace123}
+      DB_NAME: ${DB_NAME:-music_space_db}
+      SPOTIFY_CLIENT_ID: ${SPOTIFY_CLIENT_ID:-}
+      SPOTIFY_CLIENT_SECRET: ${SPOTIFY_CLIENT_SECRET:-}
+      GOOGLE_API_KEY: ${GOOGLE_API_KEY:-}
+    ports:
+      - "8000:8000"
+    depends_on:
+      db:
+        condition: service_healthy
+    volumes:
+      - ../FAST_API/main.py:/app/main.py
+      - ../FAST_API/database.py:/app/database.py
+      - ../FAST_API/init_user_models.py:/app/init_user_models.py
+      - ../FAST_API/audio_enrichment.py:/app/audio_enrichment.py
+      - ../FAST_API/M1:/app/M1
+      - ../FAST_API/M2:/app/M2
+      - ../FAST_API/M3:/app/M3
+      - ../FAST_API/LLM:/app/LLM
+      - ../FAST_API/QLTY:/app/QLTY
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+    networks:
+      - musicspace-network
+
+  # ── Node.js (Spotify Playwright) ───────────────────────────
+  # 수정 반영: --build 필요
+  backend:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    container_name: musicspace-backend
+    restart: unless-stopped
+    environment:
+      PORT: 3001
+      DB_HOST: db
+      DB_PORT: 3306
+      DB_USER: ${DB_USER:-musicspace}
+      DB_PASSWORD: ${DB_PASSWORD:-musicspace123}
+      DB_NAME: ${DB_NAME:-music_space_db}
+      JWT_SECRET: ${JWT_SECRET:-your_jwt_secret_change_me}
+      TIDAL_CLIENT_ID: ${TIDAL_CLIENT_ID:-}
+      TIDAL_CLIENT_SECRET: ${TIDAL_CLIENT_SECRET:-}
+      SPOTIFY_CLIENT_ID: ${SPOTIFY_CLIENT_ID:-}
+      SPOTIFY_CLIENT_SECRET: ${SPOTIFY_CLIENT_SECRET:-}
+      YOUTUBE_KEY: ${YOUTUBE_KEY:-}
+      YOUTUBE_CLIENT_ID: ${YOUTUBE_CLIENT_ID:-}
+      YOUTUBE_CLIENT_SECRET: ${YOUTUBE_CLIENT_SECRET:-}
+      LASTFM_API_KEY: ${LASTFM_API_KEY:-}
+      IMAGES_PATH: /app/public/images
+    ports:
+      - "3001:3001"
+    volumes:
+      - ./public/images:/app/public/images
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - musicspace-network
+
+  # ── Frontend (React + Nginx) ───────────────────────────────
+  # 수정 반영: npm run build → dist/ 마운트로 자동 반영 (--build 불필요)
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: musicspace-frontend
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+      - "8443:8443"
+    depends_on:
+      - spring-backend
+      - fastapi
+      - backend
+    volumes:
+      - ./nginx.local.conf:/etc/nginx/nginx.conf:ro
+      - ./dist:/usr/share/nginx/html                    # Vite 빌드 결과물 마운트
+      - ./public/images:/usr/share/nginx/html/images
+      - ./public/uploads:/usr/share/nginx/html/uploads
+      - ./public/webroot:/webroot
+      - ./ssl:/etc/nginx/ssl:ro
+    networks:
+      - musicspace-network
+
+volumes:
+  mariadb_data:
+  redis_data:
+
+networks:
+  musicspace-network:
+    driver: bridge

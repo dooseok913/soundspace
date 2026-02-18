@@ -1,0 +1,51 @@
+# Large data files
+FAST_API/data/spotify_114k_with_tags.csv
+humamAppleTeamPreject001/server/*.csv
+
+# Database backups
+*.sql
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+.env
+
+# Java/Gradle
+.gradle/
+build/
+!gradle/wrapper/gradle-wrapper.jar
+*.class
+*.jar
+*.war
+
+# IDE
+.idea/
+*.iml
+.vscode/
+*.swp
+*.swo
+
+# Logs
+*.log
+logs/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Docker
+docker-compose.override.yml
+
+# Keys and secrets
+keys/
+*.pem
+*.key
+
+# Node
+node_modules/
+# .env files
+**/.env

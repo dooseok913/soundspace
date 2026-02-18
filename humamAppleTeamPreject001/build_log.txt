@@ -1,0 +1,157 @@
+time="2026-02-02T07:37:45+09:00" level=warning msg="C:\\Final_team_Project\\humamAppleTeamPreject001\\docker-compose.yml: the attribute `version` is obsolete, it will be ignored, please remove it to avoid potential confusion"
+ Image humamappleteampreject001-spring-backend Building 
+#1 [internal] load local bake definitions
+#1 reading from stdin 607B 0.0s done
+#1 DONE 0.0s
+
+#2 [internal] load build definition from Dockerfile
+#2 transferring dockerfile: 970B done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/eclipse-temurin:17-jre-alpine
+#3 ...
+
+#4 [internal] load metadata for docker.io/library/gradle:8.5-jdk17
+#4 DONE 1.1s
+
+#3 [internal] load metadata for docker.io/library/eclipse-temurin:17-jre-alpine
+#3 DONE 1.1s
+
+#5 [internal] load .dockerignore
+#5 transferring context: 2B done
+#5 DONE 0.0s
+
+#6 [internal] load build context
+#6 DONE 0.0s
+
+#7 [builder 1/7] FROM docker.io/library/gradle:8.5-jdk17@sha256:7704366590930c03de7e514008ba3d7b7031b92591bd5a74fae79c16f3a17726
+#7 resolve docker.io/library/gradle:8.5-jdk17@sha256:7704366590930c03de7e514008ba3d7b7031b92591bd5a74fae79c16f3a17726 0.0s done
+#7 DONE 0.1s
+
+#8 [stage-1 1/5] FROM docker.io/library/eclipse-temurin:17-jre-alpine@sha256:71337aec9f5c665b2a6b49baed50251ee9a8fa9995c589a93be8badc85e40551
+#8 resolve docker.io/library/eclipse-temurin:17-jre-alpine@sha256:71337aec9f5c665b2a6b49baed50251ee9a8fa9995c589a93be8badc85e40551 0.0s done
+#8 DONE 0.1s
+
+#6 [internal] load build context
+#6 transferring context: 19.99kB 0.1s done
+#6 DONE 0.1s
+
+#9 [builder 2/7] WORKDIR /app
+#9 CACHED
+
+#10 [builder 3/7] COPY build.gradle settings.gradle ./
+#10 CACHED
+
+#11 [builder 4/7] COPY gradle ./gradle
+#11 CACHED
+
+#12 [builder 5/7] RUN gradle dependencies --no-daemon || true
+#12 CACHED
+
+#13 [builder 6/7] COPY src ./src
+#13 CACHED
+
+#14 [builder 7/7] RUN gradle bootJar --no-daemon -x test
+#14 1.048 To honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/8.5/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.
+#14 2.447 Daemon will be stopped at the end of the build 
+#14 21.95 
+#14 21.95 > Task :compileJava
+#14 21.95 /app/src/main/java/com/springboot/finalprojcet/entity/PlaylistTracks.java:46: warning: @Builder will ignore the initializing expression entirely. If you want the initializing expression to serve as default, add @Builder.Default. If it is not supposed to be settable during building, make the field final.
+#14 21.95     private int orderIndex = 0;
+#14 21.95                 ^
+#14 23.54 /app/src/main/java/com/springboot/finalprojcet/domain/analysis/service/impl/AnalysisServiceImpl.java:102: error: local variables referenced from a lambda expression must be final or effectively final
+#14 23.54                             .weight((double) e.getValue() / tracks.size())
+#14 23.54                                                             ^
+#14 23.94 /app/src/main/java/com/springboot/finalprojcet/domain/youtube/service/impl/YoutubeServiceImpl.java:487: error: cannot find symbol
+#14 23.94         playlist.setStatusFlag(StatusFlag.Active); // Active
+#14 23.94                                          ^
+#14 23.94   symbol:   variable Active
+#14 23.94   location: class StatusFlag
+#14 24.14 /app/src/main/java/com/springboot/finalprojcet/domain/ems/service/impl/EmsServiceImpl.java:298: error: incompatible types: inference variable T has incompatible bounds
+#14 24.14         }).collect(Collectors.toList());
+#14 24.14                   ^
+#14 24.14     equality constraints: Map<String,Object>
+#14 24.14     lower bounds: Map<String,INT#1>
+#14 24.14   where T is a type-variable:
+#14 24.14     T extends Object declared in method <T>toList()
+#14 24.15   where INT#1,INT#2 are intersection types:
+#14 24.15     INT#1 extends Object,Serializable,Comparable<? extends INT#2>,Constable,ConstantDesc
+#14 24.15     INT#2 extends Object,Serializable,Comparable<?>,Constable,ConstantDesc
+#14 24.24 /app/src/main/java/com/springboot/finalprojcet/domain/pms/service/impl/PmsServiceImpl.java:121: error: incompatible types: inference variable T has incompatible bounds
+#14 24.24         }).collect(Collectors.toList());
+#14 24.24                   ^
+#14 24.24     equality constraints: Map<String,Object>
+#14 24.24     lower bounds: Map<String,INT#1>
+#14 24.24   where T is a type-variable:
+#14 24.24     T extends Object declared in method <T>toList()
+#14 24.24   where INT#1,INT#2 are intersection types:
+#14 24.24     INT#1 extends Object,Serializable,Comparable<? extends INT#2>,Constable,ConstantDesc
+#14 24.24     INT#2 extends Object,Serializable,Comparable<?>,Constable,ConstantDesc
+#14 24.74 /app/src/main/java/com/springboot/finalprojcet/domain/training/service/impl/TrainingServiceImpl.java:257: error: cannot find symbol
+#14 24.74                 Map<String, Object> features = spotifyService.getAudioFeatures(isrc);
+#14 24.74                                                              ^
+#14 24.74   symbol:   method getAudioFeatures(String)
+#14 24.74   location: variable spotifyService of type SpotifyService
+#14 24.94 /app/src/main/java/com/springboot/finalprojcet/domain/spotify/service/impl/SpotifyServiceImpl.java:407: error: incompatible types: long cannot be converted to Integer
+#14 24.94                 track.setDuration(((Number) tMap.get("duration_ms")).longValue() / 1000);
+#14 24.94                                                                                  ^
+#14 24.94 /app/src/main/java/com/springboot/finalprojcet/domain/spotify/service/impl/SpotifyServiceImpl.java:472: error: method does not override or implement a method from a supertype
+#14 24.94     @Override
+#14 24.94     ^
+#14 24.94 /app/src/main/java/com/springboot/finalprojcet/domain/spotify/service/impl/SpotifyServiceImpl.java:486: error: method does not override or implement a method from a supertype
+#14 24.94     @Override
+#14 24.94     ^
+#14 25.04 Note: Some input files use or override a deprecated API.
+#14 25.04 Note: Recompile with -Xlint:deprecation for details.
+#14 25.04 Note: Some input files use unchecked or unsafe operations.
+#14 25.04 Note: Recompile with -Xlint:unchecked for details.
+#14 25.04 Note: Some messages have been simplified; recompile with -Xdiags:verbose to get full output
+#14 25.04 8 errors
+#14 25.04 1 warning
+#14 25.14 
+#14 25.14 > Task :compileJava FAILED
+#14 25.14 
+#14 25.14 FAILURE: Build failed with an exception.
+#14 25.14 
+#14 25.14 * What went wrong:
+#14 25.14 Execution failed for task ':compileJava'.
+#14 25.14 > Compilation failed; see the compiler error output for details.
+#14 25.15 
+#14 25.15 * Try:
+#14 25.15 > Run with --info option to get more log output.
+#14 25.15 > Run with --scan to get full insights.
+#14 25.15 
+#14 25.15 BUILD FAILED in 24s
+#14 25.15 1 actionable task: 1 executed
+#14 ERROR: process "/bin/sh -c gradle bootJar --no-daemon -x test" did not complete successfully: exit code: 1
+------
+ > [builder 7/7] RUN gradle bootJar --no-daemon -x test:
+25.14 * What went wrong:
+25.14 Execution failed for task ':compileJava'.
+25.14 > Compilation failed; see the compiler error output for details.
+25.15 
+25.15 * Try:
+25.15 > Run with --info option to get more log output.
+25.15 > Run with --scan to get full insights.
+25.15 
+25.15 BUILD FAILED in 24s
+25.15 1 actionable task: 1 executed
+------
+Dockerfile:17
+
+--------------------
+
+  15 |     
+
+  16 |     # Build the application
+
+  17 | >>> RUN gradle bootJar --no-daemon -x test
+
+  18 |     
+
+  19 |     # Production image
+
+--------------------
+
+failed to solve: process "/bin/sh -c gradle bootJar --no-daemon -x test" did not complete successfully: exit code: 1
+

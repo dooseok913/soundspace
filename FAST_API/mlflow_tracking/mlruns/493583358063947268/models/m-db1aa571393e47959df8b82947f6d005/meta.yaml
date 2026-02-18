@@ -1,0 +1,10 @@
+artifact_location: file:///D:\lecture\colab\final\integrated\FAST_API\mlflow_tracking/mlruns/493583358063947268/models/m-db1aa571393e47959df8b82947f6d005/artifacts
+creation_timestamp: 1771313353670
+experiment_id: '493583358063947268'
+last_updated_timestamp: 1771313359034
+model_id: m-db1aa571393e47959df8b82947f6d005
+model_type: null
+name: model
+source_run_id: 422288f313ca4c91a9a6d858d38099f9
+status: 2
+status_message: null

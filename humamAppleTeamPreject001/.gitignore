@@ -1,0 +1,18 @@
+node_modules
+dist
+.env
+*.log
+nul
+.DS_Store
+
+public/uploads
+
+# SSL 인증서 (private key 포함)
+ssl/
+
+# DB 덤프
+*.sql
+!docs/dbSchema.sql
+
+# 모델 파일
+*.pkl

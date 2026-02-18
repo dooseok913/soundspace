@@ -1,0 +1,16 @@
+Analyzing User Music Taste for 'jowoosung21'...
+Processed 2717 tracks successfully.
+
+=== 🎵 User Music Profile Report ===
+
+[1] Audio Features Analysis (Average):
+   - Popularity: 26.02 (±18.85)
+
+[2] Taste Personality:
+   🌙 CALM & CHILL: You prefer relaxing, ambient, or soft music.
+   😔 MELANCHOLIC: You appreciate sad, angry, or emotional music.
+   💎 DIGGER: You prefer obscure, indie, or niche tracks.
+
+[3] Top Favorites:
+   🎸 Top Genres: k-ballad (13), vocal jazz (10), Jazz (9), vocal jazz, jazz (7), celtic (6)
+   🎤 Top Artists: The Beatles (102), Diana Panton (88), Taylor Swift (84), BTS (76), Queen (62)

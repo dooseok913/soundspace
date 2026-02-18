@@ -1,0 +1,23 @@
+artifact_path: file:///D:\lecture\colab\final\integrated\FAST_API\mlflow_tracking/mlruns/493583358063947268/models/m-8c18c607d64b4c4f9a0293032a696027/artifacts
+flavors:
+  python_function:
+    env:
+      conda: conda.yaml
+      virtualenv: python_env.yaml
+    loader_module: mlflow.sklearn
+    model_path: model.pkl
+    predict_fn: predict
+    python_version: 3.10.6
+  sklearn:
+    code: null
+    pickled_model: model.pkl
+    serialization_format: cloudpickle
+    sklearn_version: 1.7.2
+    skops_trusted_types: null
+mlflow_version: 3.9.0
+model_id: m-8c18c607d64b4c4f9a0293032a696027
+model_size_bytes: 3519965
+model_uuid: m-8c18c607d64b4c4f9a0293032a696027
+prompts: null
+run_id: bb8c416dedba42a89c371223c3239aaa
+utc_time_created: '2026-02-17 07:29:03.167290'

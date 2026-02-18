@@ -1,0 +1,27 @@
+
+=== 🔮 Model v5.0 Discovery Recommendations ===
+Based on User Profile: Calm & Melancholic (Derived from History)
+Scanning 114000 candidates...
+
+Rank  | Score  | Genre           | Title                                    | Artist
+----------------------------------------------------------------------------------------------------
+1     | 0.9887 | sleep           | Extreme Rain                             | Tmsoft’s White Noise Slee
+2     | 0.9866 | sleep           | White Noise - Loopable, No Fade          | White Noise Sleep Sounds;
+3     | 0.9857 | sleep           | Pure Brown Noise - Loopable Background   | Meditation Spa;Deep Sleep
+4     | 0.9841 | sleep           | Pure White Noise - Loopable with No Fa   | Sleep Baby Sleep;Relaxati
+5     | 0.9841 | sleep           | Pouring Rain with Pure Brown Noise - L   | Deep Sleep Systems;White 
+6     | 0.9833 | sleep           | Pure Brown Noise - Loopable with no fa   | Loopable
+7     | 0.9826 | sleep           | Buffered White Noise                     | Meditation Spa;Spa;Deep S
+8     | 0.9821 | sleep           | Pure Brown Noise                         | White Noise Relaxation;Ou
+9     | 0.9815 | sleep           | Pure Brown Noise with Pouring Rain       | White Noise Therapy;Rain 
+10    | 0.9814 | sleep           | Buffered White Noise                     | Meditation Spa;Spa;Deep S
+11    | 0.9813 | sleep           | Home Air Filterer Unit                   | Sleep Baby Sleep;Soothing
+12    | 0.9807 | sleep           | Pure Brown Noise - Loopable with No Fa   | Deep Sleep;Relaxation And
+13    | 0.9765 | sleep           | Pure Brown Noise - Loopable with no fa   | Deep Sleep;Sleep Baby Sle
+14    | 0.9755 | guitar          | Blackbeard's Ghost                       | Jesse Rice
+15    | 0.9750 | sleep           | Rain Sleep: Deep Forest Rain             | Rain for Deep Sleep
+16    | 0.9723 | cantopop        | 戲劇人生 - 電視劇 “浮生六劫”主題曲之二                   | Johnny Ip
+17    | 0.9714 | rock-n-roll     | A Mi Manera                              | Jorge Muñiz;José Luis Duv
+18    | 0.9713 | cantopop        | 五點鐘去天光墟 - Live                           | my little airport
+19    | 0.9708 | trip-hop        | Come on Home                             | Everything But The Girl
+20    | 0.9701 | sleep           | Pure Brown Noise - Loopable with No Fa   | Deep Sleep;Relaxation And

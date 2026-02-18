@@ -1,0 +1,1578 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Cargo - External Music Space</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            color: #e0e0e0;
+            min-height: 100vh;
+        }
+
+        /* 사이드바 (PMS와 동일) */
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 280px;
+            height: 100vh;
+            background: rgba(15, 12, 41, 0.95);
+            backdrop-filter: blur(20px);
+            border-right: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 30px 25px;
+            z-index: 100;
+            overflow-y: auto;
+        }
+
+        .logo {
+            font-size: 32px;
+            font-weight: bold;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 50px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .nav-section {
+            margin-bottom: 40px;
+        }
+
+        .nav-section-title {
+            font-size: 12px;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .nav-menu {
+            list-style: none;
+        }
+
+        .nav-item {
+            margin-bottom: 5px;
+        }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px 20px;
+            color: #b0b0b0;
+            text-decoration: none;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            font-size: 15px;
+            font-weight: 500;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.2) 0%, rgba(118, 75, 162, 0.2) 100%);
+            color: #667eea;
+            transform: translateX(5px);
+        }
+
+        .nav-link i {
+            width: 22px;
+            text-align: center;
+            font-size: 18px;
+        }
+
+        .space-badge {
+            display: inline-block;
+            padding: 4px 10px;
+            background: rgba(102, 126, 234, 0.2);
+            border: 1px solid rgba(102, 126, 234, 0.4);
+            border-radius: 15px;
+            font-size: 10px;
+            margin-left: auto;
+            color: #667eea;
+            font-weight: 600;
+        }
+
+        .space-badge.ems {
+            background: rgba(234, 179, 8, 0.2);
+            border-color: rgba(234, 179, 8, 0.4);
+            color: #eab308;
+        }
+
+        /* 메인 컨텐츠 */
+        .main-content {
+            margin-left: 280px;
+            padding: 40px 50px;
+        }
+
+        .header {
+            margin-bottom: 50px;
+        }
+
+        .header h1 {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            background: linear-gradient(135deg, #eab308 0%, #f59e0b 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .header-subtitle {
+            font-size: 18px;
+            color: #aaa;
+            margin-bottom: 30px;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 20px;
+        }
+
+        .btn {
+            padding: 15px 30px;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #eab308 0%, #f59e0b 100%);
+            color: #1a1a2e;
+            box-shadow: 0 8px 25px rgba(234, 179, 8, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(234, 179, 8, 0.4);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: #e0e0e0;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-2px);
+        }
+
+        .btn-danger {
+            background: rgba(239, 68, 68, 0.2);
+            color: #ef4444;
+            border: 1px solid rgba(239, 68, 68, 0.4);
+        }
+
+        .btn-danger:hover {
+            background: rgba(239, 68, 68, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .btn-success {
+            background: rgba(34, 197, 94, 0.2);
+            color: #22c55e;
+            border: 1px solid rgba(34, 197, 94, 0.4);
+        }
+
+        .btn-success:hover {
+            background: rgba(34, 197, 94, 0.3);
+            transform: translateY(-2px);
+        }
+
+        /* 업로드 존 */
+        .upload-section {
+            background: rgba(26, 26, 46, 0.6);
+            border-radius: 20px;
+            padding: 50px;
+            margin-bottom: 50px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .upload-zone {
+            background: rgba(30, 30, 50, 0.4);
+            border: 3px dashed rgba(234, 179, 8, 0.3);
+            border-radius: 20px;
+            padding: 80px 60px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            margin-bottom: 40px;
+        }
+
+        .upload-zone:hover {
+            border-color: rgba(234, 179, 8, 0.6);
+            background: rgba(30, 30, 50, 0.6);
+            transform: translateY(-5px);
+        }
+
+        .upload-zone.dragover {
+            border-color: #eab308;
+            background: rgba(234, 179, 8, 0.1);
+            transform: scale(1.02);
+        }
+
+        .upload-icon {
+            font-size: 80px;
+            color: rgba(234, 179, 8, 0.5);
+            margin-bottom: 30px;
+        }
+
+        .upload-zone h3 {
+            font-size: 28px;
+            margin-bottom: 15px;
+            color: #fff;
+        }
+
+        .upload-zone p {
+            color: #aaa;
+            font-size: 16px;
+            margin-bottom: 30px;
+            line-height: 1.5;
+        }
+
+        .upload-options {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        /* 스트리밍 연동 섹션 */
+        .streaming-section {
+            background: rgba(26, 26, 46, 0.6);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 50px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .section-title {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            color: #fff;
+        }
+
+        .streaming-platforms {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+
+        .platform-card {
+            background: rgba(30, 30, 50, 0.8);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 30px;
+            display: flex;
+            align-items: center;
+            gap: 25px;
+            transition: all 0.4s ease;
+            cursor: pointer;
+        }
+
+        .platform-card:hover {
+            border-color: rgba(234, 179, 8, 0.4);
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .platform-card.connected {
+            border-color: rgba(34, 197, 94, 0.5);
+            background: rgba(34, 197, 94, 0.05);
+        }
+
+        .platform-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            color: white;
+        }
+
+        .platform-info {
+            flex: 1;
+        }
+
+        .platform-name {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: #fff;
+        }
+
+        .platform-status {
+            font-size: 14px;
+            color: #888;
+        }
+
+        .platform-status.connected {
+            color: #22c55e;
+        }
+
+        .connect-btn {
+            padding: 10px 20px;
+            background: rgba(234, 179, 8, 0.2);
+            border: 1px solid rgba(234, 179, 8, 0.4);
+            border-radius: 10px;
+            color: #eab308;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .connect-btn:hover {
+            background: rgba(234, 179, 8, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .connect-btn.connected {
+            background: rgba(34, 197, 94, 0.2);
+            border-color: rgba(34, 197, 94, 0.4);
+            color: #22c55e;
+        }
+
+        /* 플레이리스트 테이블 섹션 */
+        .table-section {
+            background: rgba(26, 26, 46, 0.6);
+            border-radius: 20px;
+            padding: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .table-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .table-actions {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .search-box {
+            position: relative;
+        }
+
+        .search-box input {
+            padding: 12px 50px 12px 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            color: #e0e0e0;
+            font-size: 14px;
+            width: 280px;
+            transition: all 0.3s ease;
+        }
+
+        .search-box input:focus {
+            outline: none;
+            border-color: rgba(234, 179, 8, 0.5);
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .search-box i {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #888;
+        }
+
+        .filter-select {
+            padding: 12px 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            color: #e0e0e0;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .filter-select:focus {
+            outline: none;
+            border-color: rgba(234, 179, 8, 0.5);
+        }
+
+        /* 데이터 테이블 */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        .data-table thead {
+            background: rgba(234, 179, 8, 0.1);
+        }
+
+        .data-table th {
+            padding: 20px 15px;
+            text-align: left;
+            font-weight: 700;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #eab308;
+            border-bottom: 2px solid rgba(234, 179, 8, 0.2);
+        }
+
+        .data-table td {
+            padding: 20px 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            vertical-align: middle;
+        }
+
+        .data-table tbody tr {
+            transition: all 0.3s ease;
+        }
+
+        .data-table tbody tr:hover {
+            background: rgba(234, 179, 8, 0.05);
+        }
+
+        .checkbox-cell {
+            width: 50px;
+        }
+
+        .checkbox-cell input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+            accent-color: #eab308;
+        }
+
+        .playlist-name {
+            font-weight: 600;
+            color: #fff;
+            font-size: 16px;
+        }
+
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 15px;
+            border-radius: 15px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .status-unverified {
+            background: rgba(234, 179, 8, 0.2);
+            color: #eab308;
+            border: 1px solid rgba(234, 179, 8, 0.3);
+        }
+
+        .status-processing {
+            background: rgba(59, 130, 246, 0.2);
+            color: #3b82f6;
+            border: 1px solid rgba(59, 130, 246, 0.3);
+        }
+
+        .status-ready {
+            background: rgba(34, 197, 94, 0.2);
+            color: #22c55e;
+            border: 1px solid rgba(34, 197, 94, 0.3);
+        }
+
+        .source-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 12px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 8px;
+        }
+
+        .icon-btn {
+            width: 36px;
+            height: 36px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            color: #e0e0e0;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            font-size: 14px;
+        }
+
+        .icon-btn:hover {
+            background: rgba(234, 179, 8, 0.2);
+            border-color: rgba(234, 179, 8, 0.4);
+            color: #eab308;
+            transform: translateY(-2px);
+        }
+
+        .icon-btn.danger:hover {
+            background: rgba(239, 68, 68, 0.2);
+            border-color: rgba(239, 68, 68, 0.4);
+            color: #ef4444;
+        }
+
+        .icon-btn.success:hover {
+            background: rgba(34, 197, 94, 0.2);
+            border-color: rgba(34, 197, 94, 0.4);
+            color: #22c55e;
+        }
+
+        .icon-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .icon-btn:disabled:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(255, 255, 255, 0.1);
+            color: #e0e0e0;
+            transform: none;
+        }
+
+        /* 빈 상태 */
+        .empty-state {
+            text-align: center;
+            padding: 80px 40px;
+            color: #888;
+        }
+
+        .empty-state i {
+            font-size: 80px;
+            margin-bottom: 30px;
+            opacity: 0.3;
+            color: #eab308;
+        }
+
+        .empty-state h3 {
+            font-size: 24px;
+            margin-bottom: 15px;
+            color: #aaa;
+        }
+
+        .empty-state p {
+            font-size: 16px;
+            line-height: 1.5;
+        }
+
+        /* 일괄 작업 바 */
+        .bulk-action-bar {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(15, 12, 41, 0.98);
+            backdrop-filter: blur(30px);
+            border: 2px solid rgba(234, 179, 8, 0.3);
+            border-radius: 15px;
+            padding: 20px 30px;
+            display: none;
+            align-items: center;
+            gap: 25px;
+            z-index: 1000;
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.5);
+        }
+
+        .bulk-action-bar.active {
+            display: flex;
+        }
+
+        .selected-count {
+            font-size: 16px;
+            color: #aaa;
+            font-weight: 500;
+        }
+
+        .selected-count strong {
+            color: #eab308;
+            font-weight: 700;
+        }
+
+        /* 로딩 스피너 */
+        .spinner {
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* 반응형 디자인 */
+        @media (max-width: 1200px) {
+            .sidebar {
+                width: 240px;
+            }
+
+            .main-content {
+                margin-left: 240px;
+                padding: 30px 40px;
+            }
+
+            .streaming-platforms {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                transform: translateX(-100%);
+                transition: transform 0.3s ease;
+            }
+
+            .sidebar.open {
+                transform: translateX(0);
+            }
+
+            .main-content {
+                margin-left: 0;
+                padding: 20px;
+            }
+
+            .header h1 {
+                font-size: 32px;
+            }
+
+            .upload-zone {
+                padding: 50px 30px;
+            }
+
+            .upload-zone h3 {
+                font-size: 20px;
+            }
+
+            .table-header {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .table-actions {
+                justify-content: center;
+            }
+
+            .search-box input {
+                width: 100%;
+            }
+
+            .data-table {
+                font-size: 13px;
+            }
+
+            .data-table th,
+            .data-table td {
+                padding: 12px 8px;
+            }
+
+            .bulk-action-bar {
+                left: 20px;
+                right: 20px;
+                transform: none;
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 사이드바 네비게이션 -->
+    <aside class="sidebar">
+        <div class="logo">
+            <i class="fas fa-music"></i>
+            <span>MusicSpace</span>
+        </div>
+
+        <div class="nav-section">
+            <div class="nav-section-title">음악 공간</div>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="index.html" class="nav-link">
+                        <i class="fas fa-home"></i>
+                        <span>My Lounge</span>
+                        <span class="space-badge">PMS</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="fas fa-flask"></i>
+                        <span>The Lab</span>
+                        <span class="space-badge">GMS</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link active">
+                        <i class="fas fa-warehouse"></i>
+                        <span>The Cargo</span>
+                        <span class="space-badge ems">EMS</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="nav-section">
+            <div class="nav-section-title">라이브러리</div>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="fas fa-heart"></i>
+                        <span>Favorites</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="fas fa-clock"></i>
+                        <span>Recently Played</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="fas fa-list"></i>
+                        <span>All Playlists</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="nav-section">
+            <div class="nav-section-title">설정</div>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="fas fa-cog"></i>
+                        <span>Settings</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="fas fa-plug"></i>
+                        <span>Connections</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </aside>
+
+    <!-- 메인 컨텐츠 -->
+    <main class="main-content">
+        <!-- 헤더 -->
+        <header class="header">
+            <h1>The Cargo</h1>
+            <p class="header-subtitle">외부에서 가져온 검증되지 않은 플레이리스트를 수집하고 관리합니다</p>
+            <div class="header-actions">
+                <button class="btn btn-secondary">
+                    <i class="fas fa-filter"></i>
+                    Advanced Filter
+                </button>
+                <button class="btn btn-primary" onclick="document.getElementById('fileInput').click()">
+                    <i class="fas fa-upload"></i>
+                    Upload Files
+                </button>
+                <input type="file" id="fileInput" style="display: none;" accept=".csv,.json,.m3u,.pls" multiple>
+            </div>
+        </header>
+
+        <!-- 업로드 섹션 -->
+        <section class="upload-section">
+            <div class="upload-zone" id="uploadZone">
+                <div class="upload-icon">
+                    <i class="fas fa-cloud-upload-alt"></i>
+                </div>
+                <h3>플레이리스트 파일을 드래그하여 업로드</h3>
+                <p>CSV, JSON, M3U, PLS 파일을 지원합니다<br>또는 플레이리스트 URL을 직접 입력할 수 있습니다</p>
+                <div class="upload-options">
+                    <button class="btn btn-primary" onclick="document.getElementById('fileInput').click()">
+                        <i class="fas fa-file"></i>
+                        파일 선택
+                    </button>
+                    <button class="btn btn-secondary" onclick="showUrlInput()">
+                        <i class="fas fa-link"></i>
+                        URL 입력
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 스트리밍 플랫폼 연동 -->
+        <section class="streaming-section">
+            <h2 class="section-title">
+                <i class="fas fa-plug"></i>
+                스트리밍 플랫폼 연동
+            </h2>
+            <div class="streaming-platforms">
+                <div class="platform-card connected">
+                    <div class="platform-icon" style="background: linear-gradient(135deg, #00D9FF 0%, #0088CC 100%);">
+                        <i class="fab fa-spotify"></i>
+                    </div>
+                    <div class="platform-info">
+                        <div class="platform-name">Tidal</div>
+                        <div class="platform-status connected">
+                            <i class="fas fa-check-circle"></i>
+                            연결됨 • 127개 플레이리스트 • 마지막 동기화: 10분 전
+                        </div>
+                    </div>
+                    <button class="connect-btn connected" onclick="syncPlatform('tidal')">
+                        <i class="fas fa-sync"></i>
+                        동기화
+                    </button>
+                </div>
+
+                <div class="platform-card">
+                    <div class="platform-icon" style="background: linear-gradient(135deg, #FF0000 0%, #CC0000 100%);">
+                        <i class="fab fa-youtube"></i>
+                    </div>
+                    <div class="platform-info">
+                        <div class="platform-name">YouTube Music</div>
+                        <div class="platform-status">연결되지 않음 • OAuth 인증 필요</div>
+                    </div>
+                    <button class="connect-btn" onclick="connectPlatform('youtube')">
+                        <i class="fas fa-link"></i>
+                        연결하기
+                    </button>
+                </div>
+
+                <div class="platform-card">
+                    <div class="platform-icon" style="background: linear-gradient(135deg, #FA57C1 0%, #C74B9F 100%);">
+                        <i class="fab fa-apple"></i>
+                    </div>
+                    <div class="platform-info">
+                        <div class="platform-name">Apple Music</div>
+                        <div class="platform-status">연결되지 않음 • MusicKit 인증 필요</div>
+                    </div>
+                    <button class="connect-btn" onclick="connectPlatform('apple')">
+                        <i class="fas fa-link"></i>
+                        연결하기
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 플레이리스트 테이블 -->
+        <section class="table-section">
+            <div class="table-header">
+                <h2 class="section-title">
+                    <i class="fas fa-database"></i>
+                    외부 플레이리스트 목록
+                    <span style="font-size: 14px; font-weight: normal; color: #888;">(5개 항목)</span>
+                </h2>
+                <div class="table-actions">
+                    <div class="search-box">
+                        <input type="text" placeholder="플레이리스트 검색..." id="searchInput">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <select class="filter-select" id="statusFilter">
+                        <option value="all">모든 상태</option>
+                        <option value="unverified">검증 필요</option>
+                        <option value="processing">처리 중</option>
+                        <option value="ready">준비 완료</option>
+                    </select>
+                    <select class="filter-select" id="sourceFilter">
+                        <option value="all">모든 소스</option>
+                        <option value="tidal">Tidal</option>
+                        <option value="youtube">YouTube Music</option>
+                        <option value="apple">Apple Music</option>
+                        <option value="file">파일 업로드</option>
+                        <option value="url">URL 입력</option>
+                    </select>
+                </div>
+            </div>
+
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th class="checkbox-cell">
+                            <input type="checkbox" id="selectAll">
+                        </th>
+                        <th>플레이리스트 이름</th>
+                        <th>소스</th>
+                        <th>트랙 수</th>
+                        <th>상태</th>
+                        <th>추가일</th>
+                        <th>작업</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr data-status="unverified" data-source="tidal">
+                        <td class="checkbox-cell">
+                            <input type="checkbox" class="row-checkbox">
+                        </td>
+                        <td>
+                            <div class="playlist-name">Summer Hits 2024</div>
+                        </td>
+                        <td>
+                            <span class="source-badge">
+                                <i class="fab fa-spotify" style="color: #00D9FF;"></i>
+                                Tidal
+                            </span>
+                        </td>
+                        <td>45 tracks</td>
+                        <td>
+                            <span class="status-badge status-unverified">
+                                <i class="fas fa-exclamation-circle"></i>
+                                검증 필요
+                            </span>
+                        </td>
+                        <td>2024-01-20</td>
+                        <td>
+                            <div class="action-buttons">
+                                <button class="icon-btn" title="AI 분석 시작" onclick="analyzePlaylist(this)">
+                                    <i class="fas fa-brain"></i>
+                                </button>
+                                <button class="icon-btn" title="미리보기">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="icon-btn danger" title="삭제">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+
+                    <tr data-status="processing" data-source="file">
+                        <td class="checkbox-cell">
+                            <input type="checkbox" class="row-checkbox">
+                        </td>
+                        <td>
+                            <div class="playlist-name">Chill Vibes Collection</div>
+                        </td>
+                        <td>
+                            <span class="source-badge">
+                                <i class="fas fa-file-csv" style="color: #10b981;"></i>
+                                CSV File
+                            </span>
+                        </td>
+                        <td>32 tracks</td>
+                        <td>
+                            <span class="status-badge status-processing">
+                                <i class="fas fa-spinner spinner"></i>
+                                처리 중
+                            </span>
+                        </td>
+                        <td>2024-01-21</td>
+                        <td>
+                            <div class="action-buttons">
+                                <button class="icon-btn" title="AI 분석 중" disabled>
+                                    <i class="fas fa-brain"></i>
+                                </button>
+                                <button class="icon-btn" title="미리보기">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="icon-btn danger" title="삭제">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+
+                    <tr data-status="ready" data-source="url">
+                        <td class="checkbox-cell">
+                            <input type="checkbox" class="row-checkbox">
+                        </td>
+                        <td>
+                            <div class="playlist-name">Rock Classics Mix</div>
+                        </td>
+                        <td>
+                            <span class="source-badge">
+                                <i class="fas fa-link" style="color: #8b5cf6;"></i>
+                                URL Import
+                            </span>
+                        </td>
+                        <td>58 tracks</td>
+                        <td>
+                            <span class="status-badge status-ready">
+                                <i class="fas fa-check-circle"></i>
+                                GMS 준비완료
+                            </span>
+                        </td>
+                        <td>2024-01-22</td>
+                        <td>
+                            <div class="action-buttons">
+                                <button class="icon-btn success" title="GMS로 보내기" onclick="sendToGMS(this)">
+                                    <i class="fas fa-arrow-right"></i>
+                                </button>
+                                <button class="icon-btn" title="미리보기">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="icon-btn danger" title="삭제">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+
+                    <tr data-status="unverified" data-source="tidal">
+                        <td class="checkbox-cell">
+                            <input type="checkbox" class="row-checkbox">
+                        </td>
+                        <td>
+                            <div class="playlist-name">Electronic Dreams</div>
+                        </td>
+                        <td>
+                            <span class="source-badge">
+                                <i class="fab fa-spotify" style="color: #00D9FF;"></i>
+                                Tidal
+                            </span>
+                        </td>
+                        <td>41 tracks</td>
+                        <td>
+                            <span class="status-badge status-unverified">
+                                <i class="fas fa-exclamation-circle"></i>
+                                검증 필요
+                            </span>
+                        </td>
+                        <td>2024-01-22</td>
+                        <td>
+                            <div class="action-buttons">
+                                <button class="icon-btn" title="AI 분석 시작" onclick="analyzePlaylist(this)">
+                                    <i class="fas fa-brain"></i>
+                                </button>
+                                <button class="icon-btn" title="미리보기">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="icon-btn danger" title="삭제">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+
+                    <tr data-status="unverified" data-source="file">
+                        <td class="checkbox-cell">
+                            <input type="checkbox" class="row-checkbox">
+                        </td>
+                        <td>
+                            <div class="playlist-name">Jazz Essentials</div>
+                        </td>
+                        <td>
+                            <span class="source-badge">
+                                <i class="fas fa-file-code" style="color: #f59e0b;"></i>
+                                JSON File
+                            </span>
+                        </td>
+                        <td>29 tracks</td>
+                        <td>
+                            <span class="status-badge status-unverified">
+                                <i class="fas fa-exclamation-circle"></i>
+                                검증 필요
+                            </span>
+                        </td>
+                        <td>2024-01-23</td>
+                        <td>
+                            <div class="action-buttons">
+                                <button class="icon-btn" title="AI 분석 시작" onclick="analyzePlaylist(this)">
+                                    <i class="fas fa-brain"></i>
+                                </button>
+                                <button class="icon-btn" title="미리보기">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="icon-btn danger" title="삭제">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </main>
+
+    <!-- 일괄 작업 바 -->
+    <div class="bulk-action-bar" id="bulkActionBar">
+        <div class="selected-count">
+            <strong id="selectedCount">0</strong>개 항목이 선택됨
+        </div>
+        <div style="display: flex; gap: 15px;">
+            <button class="btn btn-success" onclick="bulkAnalyze()">
+                <i class="fas fa-brain"></i>
+                선택 항목 AI 분석
+            </button>
+            <button class="btn btn-secondary" onclick="bulkSendToGMS()">
+                <i class="fas fa-arrow-right"></i>
+                GMS로 보내기
+            </button>
+            <button class="btn btn-danger" onclick="bulkDelete()">
+                <i class="fas fa-trash"></i>
+                선택 항목 삭제
+            </button>
+            <button class="btn btn-secondary" onclick="clearSelection()">
+                <i class="fas fa-times"></i>
+                선택 해제
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // 전역 변수
+        let isProcessing = false;
+
+        // 드래그 앤 드롭 기능
+        const uploadZone = document.getElementById('uploadZone');
+
+        uploadZone.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            uploadZone.classList.add('dragover');
+        });
+
+        uploadZone.addEventListener('dragleave', () => {
+            uploadZone.classList.remove('dragover');
+        });
+
+        uploadZone.addEventListener('drop', (e) => {
+            e.preventDefault();
+            uploadZone.classList.remove('dragover');
+            const files = e.dataTransfer.files;
+            handleFiles(files);
+        });
+
+        uploadZone.addEventListener('click', () => {
+            document.getElementById('fileInput').click();
+        });
+
+        document.getElementById('fileInput').addEventListener('change', (e) => {
+            handleFiles(e.target.files);
+        });
+
+        // 파일 처리 함수
+        function handleFiles(files) {
+            if (files.length === 0) return;
+
+            console.log('Files uploaded:', files);
+
+            // 파일 검증
+            const validTypes = ['.csv', '.json', '.m3u', '.pls'];
+            const invalidFiles = Array.from(files).filter(file => {
+                const extension = '.' + file.name.split('.').pop().toLowerCase();
+                return !validTypes.includes(extension);
+            });
+
+            if (invalidFiles.length > 0) {
+                alert(`지원하지 않는 파일 형식입니다: ${invalidFiles.map(f => f.name).join(', ')}`);
+                return;
+            }
+
+            // 성공 메시지
+            showNotification(`${files.length}개의 파일이 성공적으로 업로드되었습니다.`, 'success');
+
+            // 실제 구현에서는 여기서 서버로 파일 전송
+            // 임시로 테이블에 새 행 추가 (데모용)
+            setTimeout(() => {
+                addNewPlaylistRow(files[0].name);
+            }, 1000);
+        }
+
+        // URL 입력 모달
+        function showUrlInput() {
+            const url = prompt('플레이리스트 URL을 입력하세요:\n(Spotify, YouTube Music, Apple Music 등)');
+            if (url && url.trim()) {
+                if (isValidURL(url)) {
+                    showNotification('URL에서 플레이리스트를 가져오는 중...', 'info');
+                    // 실제 구현에서는 URL 파싱 및 데이터 추출
+                    setTimeout(() => {
+                        addNewPlaylistRow('URL 플레이리스트');
+                        showNotification('플레이리스트를 성공적으로 가져왔습니다.', 'success');
+                    }, 2000);
+                } else {
+                    alert('올바른 URL 형식이 아닙니다.');
+                }
+            }
+        }
+
+        // URL 유효성 검사
+        function isValidURL(string) {
+            try {
+                new URL(string);
+                return true;
+            } catch (_) {
+                return false;
+            }
+        }
+
+        // 새 플레이리스트 행 추가 (데모용)
+        function addNewPlaylistRow(name) {
+            const tbody = document.querySelector('.data-table tbody');
+            const newRow = document.createElement('tr');
+            newRow.setAttribute('data-status', 'unverified');
+            newRow.setAttribute('data-source', 'file');
+
+            newRow.innerHTML = `
+                <td class="checkbox-cell">
+                    <input type="checkbox" class="row-checkbox">
+                </td>
+                <td>
+                    <div class="playlist-name">${name}</div>
+                </td>
+                <td>
+                    <span class="source-badge">
+                        <i class="fas fa-file" style="color: #10b981;"></i>
+                        File Upload
+                    </span>
+                </td>
+                <td>? tracks</td>
+                <td>
+                    <span class="status-badge status-unverified">
+                        <i class="fas fa-exclamation-circle"></i>
+                        검증 필요
+                    </span>
+                </td>
+                <td>${new Date().toISOString().split('T')[0]}</td>
+                <td>
+                    <div class="action-buttons">
+                        <button class="icon-btn" title="AI 분석 시작" onclick="analyzePlaylist(this)">
+                            <i class="fas fa-brain"></i>
+                        </button>
+                        <button class="icon-btn" title="미리보기">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                        <button class="icon-btn danger" title="삭제">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                </td>
+            `;
+
+            tbody.appendChild(newRow);
+
+            // 새 행에도 이벤트 리스너 추가
+            newRow.querySelector('.row-checkbox').addEventListener('change', updateBulkActionBar);
+        }
+
+        // 스트리밍 플랫폼 연결
+        function connectPlatform(platform) {
+            showNotification(`${platform} 플랫폼에 연결하는 중...`, 'info');
+            // 실제 구현에서는 OAuth 플로우 시작
+            setTimeout(() => {
+                showNotification(`${platform} 플랫폼이 성공적으로 연결되었습니다.`, 'success');
+            }, 2000);
+        }
+
+        // 스트리밍 플랫폼 동기화
+        function syncPlatform(platform) {
+            if (isProcessing) return;
+
+            isProcessing = true;
+            const button = event.target.closest('button');
+            const icon = button.querySelector('i');
+
+            // 버튼 상태 변경
+            button.disabled = true;
+            icon.classList.add('spinner');
+            button.innerHTML = '<i class="fas fa-spinner spinner"></i> 동기화 중...';
+
+            showNotification(`${platform} 플레이리스트를 동기화하는 중...`, 'info');
+
+            // 실제 구현에서는 API 호출
+            setTimeout(() => {
+                button.disabled = false;
+                icon.classList.remove('spinner');
+                button.innerHTML = '<i class="fas fa-sync"></i> 동기화';
+                isProcessing = false;
+                showNotification(`${platform} 동기화가 완료되었습니다. 새로운 플레이리스트 15개를 발견했습니다.`, 'success');
+            }, 3000);
+        }
+
+        // AI 분석 시작
+        function analyzePlaylist(button) {
+            if (isProcessing) return;
+
+            const row = button.closest('tr');
+            const statusBadge = row.querySelector('.status-badge');
+            const playlistName = row.querySelector('.playlist-name').textContent;
+
+            // 상태 변경
+            statusBadge.className = 'status-badge status-processing';
+            statusBadge.innerHTML = '<i class="fas fa-spinner spinner"></i> 처리 중';
+
+            // 버튼 비활성화
+            button.disabled = true;
+
+            showNotification(`"${playlistName}" AI 분석을 시작합니다...`, 'info');
+
+            // 실제 구현에서는 AI 분석 API 호출
+            setTimeout(() => {
+                statusBadge.className = 'status-badge status-ready';
+                statusBadge.innerHTML = '<i class="fas fa-check-circle"></i> GMS 준비완료';
+
+                // 버튼 변경
+                button.className = 'icon-btn success';
+                button.title = 'GMS로 보내기';
+                button.innerHTML = '<i class="fas fa-arrow-right"></i>';
+                button.disabled = false;
+                button.onclick = () => sendToGMS(button);
+
+                showNotification(`"${playlistName}" AI 분석이 완료되었습니다. GMS로 보낼 준비가 되었습니다.`, 'success');
+            }, 4000);
+        }
+
+        // GMS로 보내기
+        function sendToGMS(button) {
+            const row = button.closest('tr');
+            const playlistName = row.querySelector('.playlist-name').textContent;
+
+            if (confirm(`"${playlistName}"을(를) GMS로 보내시겠습니까?`)) {
+                showNotification(`"${playlistName}"을(를) GMS로 보내는 중...`, 'info');
+
+                // 실제 구현에서는 GMS 전송 API 호출
+                setTimeout(() => {
+                    row.style.opacity = '0.5';
+                    showNotification(`"${playlistName}"이(가) GMS로 성공적으로 전송되었습니다.`, 'success');
+
+                    // 3초 후 행 제거 (실제로는 상태만 변경)
+                    setTimeout(() => {
+                        row.remove();
+                        updateBulkActionBar();
+                    }, 3000);
+                }, 1500);
+            }
+        }
+
+        // 체크박스 관리
+        const selectAllCheckbox = document.getElementById('selectAll');
+        const bulkActionBar = document.getElementById('bulkActionBar');
+        const selectedCountEl = document.getElementById('selectedCount');
+
+        selectAllCheckbox.addEventListener('change', function () {
+            const visibleCheckboxes = document.querySelectorAll('.row-checkbox:not([style*="display: none"])');
+            visibleCheckboxes.forEach(checkbox => {
+                checkbox.checked = this.checked;
+            });
+            updateBulkActionBar();
+        });
+
+        // 개별 체크박스 이벤트 (동적 추가 고려)
+        document.addEventListener('change', function (e) {
+            if (e.target.classList.contains('row-checkbox')) {
+                updateBulkActionBar();
+            }
+        });
+
+        function updateBulkActionBar() {
+            const checkedCount = document.querySelectorAll('.row-checkbox:checked').length;
+            selectedCountEl.textContent = checkedCount;
+
+            if (checkedCount > 0) {
+                bulkActionBar.classList.add('active');
+            } else {
+                bulkActionBar.classList.remove('active');
+            }
+
+            // 전체 선택 체크박스 상태 업데이트
+            const totalVisible = document.querySelectorAll('.row-checkbox:not([style*="display: none"])').length;
+            selectAllCheckbox.checked = checkedCount > 0 && checkedCount === totalVisible;
+            selectAllCheckbox.indeterminate = checkedCount > 0 && checkedCount < totalVisible;
+        }
+
+        function clearSelection() {
+            document.querySelectorAll('.row-checkbox').forEach(checkbox => {
+                checkbox.checked = false;
+            });
+            selectAllCheckbox.checked = false;
+            selectAllCheckbox.indeterminate = false;
+            updateBulkActionBar();
+        }
+
+        // 일괄 작업 함수들
+        function bulkAnalyze() {
+            const checkedRows = document.querySelectorAll('.row-checkbox:checked');
+            if (checkedRows.length === 0) return;
+
+            if (confirm(`선택된 ${checkedRows.length}개 플레이리스트를 AI 분석하시겠습니까?`)) {
+                checkedRows.forEach(checkbox => {
+                    const row = checkbox.closest('tr');
+                    const analyzeBtn = row.querySelector('.icon-btn[title*="AI 분석"]');
+                    if (analyzeBtn && !analyzeBtn.disabled) {
+                        setTimeout(() => analyzePlaylist(analyzeBtn), Math.random() * 2000);
+                    }
+                });
+                clearSelection();
+            }
+        }
+
+        function bulkSendToGMS() {
+            const checkedRows = document.querySelectorAll('.row-checkbox:checked');
+            const readyRows = Array.from(checkedRows).filter(checkbox => {
+                const row = checkbox.closest('tr');
+                return row.querySelector('.status-ready');
+            });
+
+            if (readyRows.length === 0) {
+                alert('GMS로 보낼 준비가 완료된 플레이리스트가 없습니다.');
+                return;
+            }
+
+            if (confirm(`준비 완료된 ${readyRows.length}개 플레이리스트를 GMS로 보내시겠습니까?`)) {
+                readyRows.forEach(checkbox => {
+                    const row = checkbox.closest('tr');
+                    const sendBtn = row.querySelector('.icon-btn.success');
+                    if (sendBtn) {
+                        setTimeout(() => sendToGMS(sendBtn), Math.random() * 1000);
+                    }
+                });
+                clearSelection();
+            }
+        }
+
+        function bulkDelete() {
+            const checkedRows = document.querySelectorAll('.row-checkbox:checked');
+            if (checkedRows.length === 0) return;
+
+            if (confirm(`선택된 ${checkedRows.length}개 플레이리스트를 삭제하시겠습니까?\n이 작업은 되돌릴 수 없습니다.`)) {
+                checkedRows.forEach(checkbox => {
+                    const row = checkbox.closest('tr');
+                    row.style.transition = 'opacity 0.3s ease';
+                    row.style.opacity = '0';
+                    setTimeout(() => row.remove(), 300);
+                });
+                clearSelection();
+                showNotification('선택된 플레이리스트가 삭제되었습니다.', 'success');
+            }
+        }
+
+        // 검색 및 필터링
+        const searchInput = document.getElementById('searchInput');
+        const statusFilter = document.getElementById('statusFilter');
+        const sourceFilter = document.getElementById('sourceFilter');
+
+        function filterTable() {
+            const searchTerm = searchInput.value.toLowerCase();
+            const statusValue = statusFilter.value;
+            const sourceValue = sourceFilter.value;
+            const rows = document.querySelectorAll('.data-table tbody tr');
+
+            rows.forEach(row => {
+                const playlistName = row.querySelector('.playlist-name').textContent.toLowerCase();
+                const status = row.getAttribute('data-status');
+                const source = row.getAttribute('data-source');
+
+                const matchesSearch = playlistName.includes(searchTerm);
+                const matchesStatus = statusValue === 'all' || status === statusValue;
+                const matchesSource = sourceValue === 'all' || source === sourceValue;
+
+                if (matchesSearch && matchesStatus && matchesSource) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                    // 숨겨진 행의 체크박스는 해제
+                    const checkbox = row.querySelector('.row-checkbox');
+                    if (checkbox.checked) {
+                        checkbox.checked = false;
+                    }
+                }
+            });
+
+            updateBulkActionBar();
+        }
+
+        searchInput.addEventListener('input', filterTable);
+        statusFilter.addEventListener('change', filterTable);
+        sourceFilter.addEventListener('change', filterTable);
+
+        // 알림 시스템
+        function showNotification(message, type = 'info') {
+            // 기존 알림 제거
+            const existingNotification = document.querySelector('.notification');
+            if (existingNotification) {
+                existingNotification.remove();
+            }
+
+            const notification = document.createElement('div');
+            notification.className = `notification notification-${type}`;
+            notification.style.cssText = `
+                position: fixed;
+                top: 30px;
+                right: 30px;
+                padding: 15px 25px;
+                border-radius: 10px;
+                color: white;
+                font-weight: 500;
+                z-index: 9999;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+                transform: translateX(400px);
+                transition: transform 0.3s ease;
+            `;
+
+            // 타입별 색상
+            const colors = {
+                info: 'linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%)',
+                success: 'linear-gradient(135deg, #22c55e 0%, #16a34a 100%)',
+                warning: 'linear-gradient(135deg, #eab308 0%, #ca8a04 100%)',
+                error: 'linear-gradient(135deg, #ef4444 0%, #dc2626 100%)'
+            };
+
+            notification.style.background = colors[type] || colors.info;
+            notification.textContent = message;
+
+            document.body.appendChild(notification);
+
+            // 슬라이드 인
+            setTimeout(() => {
+                notification.style.transform = 'translateX(0)';
+            }, 100);
+
+            // 자동 제거
+            setTimeout(() => {
+                notification.style.transform = 'translateX(400px)';
+                setTimeout(() => {
+                    if (notification.parentNode) {
+                        notification.remove();
+                    }
+                }, 300);
+            }, 4000);
+        }
+
+        // 초기화
+        document.addEventListener('DOMContentLoaded', function () {
+            showNotification('The Cargo에 오신 것을 환영합니다!', 'info');
+        });
+    </script>
+</body>
+
+</html>
