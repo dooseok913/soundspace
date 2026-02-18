@@ -16,11 +16,11 @@ AI 기반 3단계 음악 검증 시스템 (EMS → GMS → PMS)
 
 ## 성능
 
-| 모델/기능 | 지표 | 결과 |
-|-----------|------|------|
-| 오디오 역추정 (GBRegressor) | R² | 0.85+ |
-| 앙상블 추천 | NDCG@50 | 0.571 (50배 향상) |
-| LLM 응답 | Latency | ~500ms |
+| 모델/기능 | 설명 |
+|-----------|------|
+| GBRegressor 오디오 역추정 | 11만건 과거 데이터 기반 오디오 특성 복원 |
+| SVM 선호도 분류 | 개인 vs 일반 플레이리스트 이진 분류 |
+| LLM 응답 (Gemini 2.5) | 평균 Latency ~500ms |
 
 ## 기술 스택
 
@@ -60,21 +60,21 @@ soundspace/
 | 이성훈 (PM) | RESTful API 통합, CI/CD 자동화, 인증 시스템 |
 | 정혜원 (PL) | Ridge Regression 모델링, DB 스키마, 오디오 특성 예측 |
 | 조우성 | 프론트엔드 구현, 스트리밍 연동 |
-| **최두석** | **GBRegressor 오디오 역추적, SVM 선호도 모델링, LLM 구현** |
-| 김기열 | KNN 앙상블 설계, RAG 파이프라인 |
+| **최두석** | **GBRegressor 오디오 역추적, SVM 선호도 모델링, RAG + ChromaDB 기반 LLM 구현** |
+| 김기열 | KNN 앙상블 설계, 20개 모델 비교 분석 |
 
 ## 담당 역할 상세 (최두석)
 
 ### 1. GBRegressor 오디오 역추적
 - Spotify API 제약으로 누락된 오디오 특성을 과거 데이터(11만 건) 기반으로 역추정
-- ISRC를 활용한 외부 데이터 매핑으로 특징량 확장
+- 9개 오디오 특성(danceability, energy, valence 등) 복원
 
 ### 2. SVM 선호도 모델링
 - 개인 플레이리스트 vs 일반 플레이리스트 이진 분류
 - 사용자 취향 DNA 학습
 
-### 3. LLM 구현
-- Gemini 2.5 Flash 기반 RAG 파이프라인
+### 3. RAG 기반 LLM 구현
+- Gemini 2.5 Flash + ChromaDB 벡터 검색
 - 추천 설명 생성 및 한국어 쿼리 처리
 
 ### 4. MLOps 인프라
